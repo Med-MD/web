@@ -160,7 +160,7 @@
             left: 0;
             width: 100%;
             height: 100vh;
-            background: 
+            background:
                 radial-gradient(circle at 20% 80%, var(--background-gradient-1) 0%, transparent 60%),
                 radial-gradient(circle at 80% 20%, var(--background-gradient-2) 0%, transparent 60%),
                 radial-gradient(circle at 40% 40%, var(--background-gradient-3) 0%, transparent 60%),
@@ -341,7 +341,7 @@
             border-radius: 24px;
             padding: 40px;
             margin-bottom: 40px;
-            box-shadow: 
+            box-shadow:
                 0 20px 40px var(--box-shadow),
                 0 0 0 1px rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -359,9 +359,10 @@
             transform: translateY(0);
         }
 
-        .content-box:hover {
+        /* Remove hover effect from team content box */
+        .content-box:not(#team):hover {
             transform: translateY(-5px);
-            box-shadow: 
+            box-shadow:
                 0 30px 60px var(--box-shadow),
                 0 0 0 1px rgba(255, 255, 255, 0.15);
         }
@@ -424,7 +425,7 @@
             border-radius: 24px;
             padding: 40px;
             margin-bottom: 40px;
-            box-shadow: 
+            box-shadow:
                 0 20px 40px var(--box-shadow),
                 0 0 0 1px rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -484,7 +485,14 @@
             font-size: 1.1rem;
         }
 
-        .signup-button {
+        .program-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .signup-button, .quiz-button {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
             border: none;
@@ -494,14 +502,493 @@
             font-size: 1.1rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            display: block;
-            margin: 0 auto;
             box-shadow: 0 8px 25px rgba(53, 64, 102, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .signup-button:hover {
+        .quiz-button {
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+        }
+
+        .signup-button:hover, .quiz-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 12px 35px rgba(53, 64, 102, 0.4);
+        }
+
+        /* Quiz Modal Styles */
+        .quiz-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px;
+        }
+
+        .quiz-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .quiz-modal-content {
+            background: var(--box-background);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 900px;
+            width: 100%;
+            height: 90vh;
+            box-shadow: 0 30px 60px var(--box-shadow);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .quiz-modal.active .quiz-modal-content {
+            transform: scale(1);
+        }
+
+        /* Hide scrollbar */
+        .quiz-modal-content::-webkit-scrollbar {
+            display: none;
+        }
+
+        .quiz-modal-content {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(53, 64, 102, 0.1);
+            flex-shrink: 0;
+        }
+
+        .quiz-title {
+            color: var(--text-accent);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .quiz-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: color 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .quiz-close:hover {
+            color: var(--text-accent);
+            background: rgba(53, 64, 102, 0.1);
+        }
+
+        .quiz-progress-container {
+            margin-bottom: 30px;
+            flex-shrink: 0;
+        }
+
+        .quiz-progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .quiz-counter {
+            color: var(--text-accent);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .quiz-progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(53, 64, 102, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .quiz-progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .quiz-question-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+
+        .quiz-question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .quiz-question-title {
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            font-weight: 600;
+            line-height: 1.4;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .quiz-question-meta {
+            display: flex;
+            gap: 15px;
+            flex-shrink: 0;
+        }
+
+        .quiz-difficulty, .quiz-week {
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .quiz-difficulty {
+            background: rgba(107, 123, 163, 0.1);
+            color: var(--accent-color);
+            border: 1px solid rgba(107, 123, 163, 0.2);
+        }
+
+        .quiz-week {
+            background: rgba(53, 64, 102, 0.1);
+            color: var(--primary-color);
+            border: 1px solid rgba(53, 64, 102, 0.2);
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex: 1;
+            align-content: start;
+        }
+
+        .quiz-option {
+            background: rgba(53, 64, 102, 0.05);
+            border: 2px solid rgba(53, 64, 102, 0.1);
+            border-radius: 12px;
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-primary);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .quiz-option:hover {
+            background: rgba(53, 64, 102, 0.1);
+            border-color: rgba(53, 64, 102, 0.2);
+        }
+
+        .quiz-option.selected {
+            background: rgba(53, 64, 102, 0.15);
+            border-color: var(--primary-color);
+            color: var(--text-accent);
+        }
+
+        .quiz-option-letter {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .quiz-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .quiz-back, .quiz-submit {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(53, 64, 102, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quiz-back {
+            background: rgba(53, 64, 102, 0.1);
+            color: var(--text-accent);
+            border: 2px solid rgba(53, 64, 102, 0.2);
+            box-shadow: none;
+        }
+
+        .quiz-back:hover:not(:disabled), .quiz-submit:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(53, 64, 102, 0.4);
+        }
+
+        .quiz-back:hover:not(:disabled) {
+            background: rgba(53, 64, 102, 0.15);
+            box-shadow: 0 4px 15px rgba(53, 64, 102, 0.2);
+        }
+
+        .quiz-submit:disabled, .quiz-back:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .quiz-results {
+            display: flex;
+            height: 100%;
+            gap: 30px;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .quiz-results-left {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 300px;
+        }
+
+        .quiz-results-right {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 10px;
+            min-height: 0;
+        }
+
+        /* Hide scrollbar for results area */
+        .quiz-results-right::-webkit-scrollbar {
+            display: none;
+        }
+
+        .quiz-results-right {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .quiz-results h3 {
+            color: var(--text-accent);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .progress-ring-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+        }
+
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+
+        .progress-ring-circle {
+            fill: none;
+            stroke-width: 8;
+        }
+
+        .progress-ring-background {
+            stroke: rgba(53, 64, 102, 0.1);
+        }
+
+        .progress-ring-progress {
+            stroke: var(--primary-color);
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1s ease-in-out;
+        }
+
+        .progress-ring-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .quiz-message {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .quiz-message a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .quiz-message a:hover {
+            text-decoration: underline;
+        }
+
+        .quiz-review {
+            margin-bottom: 30px;
+        }
+
+        .quiz-review h4 {
+            color: var(--text-accent);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .review-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(53, 64, 102, 0.05);
+            border-radius: 10px;
+            border-left: 4px solid #ef4444;
+        }
+
+        .review-item.correct {
+            border-left-color: #10b981;
+        }
+
+        .review-question {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .review-answer {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+        }
+
+        .review-answer.correct {
+            color: #10b981;
+        }
+
+        .review-answer.incorrect {
+            color: #ef4444;
+        }
+
+        .weak-weeks {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .weak-weeks h4 {
+            color: #ef4444;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .weak-weeks-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .weak-week-tag {
+            padding: 8px 16px;
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .quiz-results-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .quiz-retake, .quiz-close-btn {
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .quiz-retake {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 4px 15px rgba(53, 64, 102, 0.3);
+        }
+
+        .quiz-close-btn {
+            background: rgba(53, 64, 102, 0.1);
+            color: var(--text-accent);
+            border: 2px solid rgba(53, 64, 102, 0.2);
+        }
+
+        .quiz-retake:hover, .quiz-close-btn:hover {
+            transform: translateY(-2px);
         }
 
         /* Week Cards Grid */
@@ -834,6 +1321,44 @@
             .team-modal-image.default {
                 font-size: 3rem;
             }
+
+            .program-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .quiz-question-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .quiz-question-meta {
+                align-self: flex-start;
+            }
+
+            .quiz-results {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .quiz-results-left {
+                width: 100%;
+            }
+
+            .quiz-results-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .quiz-buttons {
+                flex-direction: column;
+            }
+
+            .quiz-modal-content {
+                max-width: 95%;
+                height: 95vh;
+                padding: 30px 20px;
+            }
         }
 
         /* Professional Footer */
@@ -1156,12 +1681,6 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#journey" class="nav-link">
-                            <i class="fas fa-route"></i>
-                            Journey
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a href="#programs" class="nav-link">
                             <i class="fas fa-graduation-cap"></i>
                             Programs
@@ -1215,57 +1734,10 @@
             <div class="content-box" data-scroll="100" id="about">
                 <h2>Why Was MedMD Created?</h2>
                 <p>"At MedMD, our mission is to cultivate a passion for medicine and healthcare by providing engaging, student-led educational experiences for young learners. We believe that early exposure to the medical field can inspire curiosity, build knowledge, and open doors to many future opportunities.<br><br>
-
                 Our organization is aimed to close the gap between aspiring high school students interested in medicine and K-8 students eager to learn. Through interactive lessons and hands-on activities, we aim to make medical education accessible, exciting, and impactful. By nurturing a supportive learning environment, we encourage young minds to explore the vast world of healthcare, empowering them with knowledge and confidence to pursue their future interests.<br><br>
-
                 MedMD is more than just an educational program—it is a community of students dedicated to making a difference. We work to spark enthusiasm for medicine, foster future leaders in healthcare, and create a lasting impact on students of all ages. Through collaboration, innovation, and a shared passion for learning, we are shaping the future of medicine, one lesson at a time."</p>
                 
                 <p class="highlight">- Katherine Xu, Co-Founder & Teacher</p>
-            </div>
-
-            <!-- Mission Section -->
-            <div class="content-box" data-scroll="200" id="journey">
-                <h2>Our Journey</h2>
-                <p>Hey, I was doing just fine before I met you<br>
-                I drink too much and that's an issue, but I'm okay<br>
-                Hey, you tell your friends it was nice to meet them<br>
-                But I hope I never see them again<br>
-                I know it breaks your heart<br>
-                Moved to the city in a broke-down car, and<br>
-                Four years, no calls<br>
-                Now you're looking pretty in a hotel bar<br>
-                And I, I, I, I, I can't stop<br>
-                No, I, I, I, I, I can't stop<br>
-                So, baby, pull me closer<br>
-                In the back seat of your Rover<br>
-                That I know you can't afford<br>
-                Bite that tattoo on your shoulder<br>
-                Pull the sheets right off the corner<br>
-                Of that mattress that you stole<br>
-                From your roommate back in Boulder<br>
-                We ain't ever getting older<br>
-                We ain't ever getting older<br>
-                We ain't ever getting older<br>
-                You look as good as the day I met you<br>
-                I forget just why I left you, I was insane<br>
-                Stay and play that Blink-182 song<br>
-                That we beat to death in Tucson, okay<br>
-                I know it breaks your heart<br>
-                Moved to the city in a broke-down car, and<br>
-                Four years, no call<br>
-                Now I'm looking pretty in a hotel bar<br>
-                And I, I, I, I, I can't stop<br>
-                No, I, I, I, I, I can't stop<br>
-                So, baby, pull me closer<br>
-                In the back seat of your Rover<br>
-                That I know you can't afford<br>
-                Bite that tattoo on your shoulder<br>
-                Pull the sheets right off the corner<br>
-                Of that mattress that you stole<br>
-                From your roommate back in Boulder<br>
-                We ain't ever getting older<br>
-                We ain't ever getting older<br>
-                We ain't ever getting older</p>
             </div>
 
             <!-- Programs Section Header -->
@@ -1300,10 +1772,16 @@
                     </div>
                 </div>
                 
-                <button class="signup-button">
-                    <i class="fas fa-user-plus"></i>
-                    Sign Up for Program
-                </button>
+                <div class="program-buttons">
+                    <button class="signup-button" onclick="scrollToSignup()">
+                        <i class="fas fa-user-plus"></i>
+                        Sign Up for Program
+                    </button>
+                    <button class="quiz-button" onclick="openQuizModal()">
+                        <i class="fas fa-brain"></i>
+                        Take Diagnostic Quiz
+                    </button>
+                </div>
             </div>
 
             <!-- 8 Week Program Grid -->
@@ -1387,95 +1865,166 @@
                 <p>Meet the passionate individuals behind MedMD who are dedicated to revolutionizing medical education.</p>
                 
                 <div class="team-grid">
-    <div class="team-card" data-scroll="800">
-        <div class="team-image">
-            <i class="fas fa-user"></i>
-        </div>
-        <div class="team-divider"></div>
-        <div class="team-info">
-            <div class="team-name">Akash Saran</div>
-            <div class="team-role">Co-Founder/Teacher</div>
-            <div style="display: flex; gap: 10px; margin-top: 20px;">
-                <button class="contact-button">
-                    <i class="fas fa-envelope"></i>
-                    Contact
-                </button>
-                <button class="info-button" onclick="openTeamModal('akash')">
-                    <i class="fas fa-info-circle"></i>
-                    Info
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <div class="team-card" data-scroll="850">
-        <div class="team-image" id="cailynTeamImage">
-            <img src="images/CailynFAbout.png" alt="Cailyn Farrell" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;" onload="this.parentElement.style.background='none'" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-user\'></i>'; this.parentElement.style.background='linear-gradient(135deg, var(--primary-light), var(--accent-color))'; this.parentElement.style.color='var(--primary-color)';">
-        </div>
-        <div class="team-divider"></div>
-        <div class="team-info">
-            <div class="team-name">Cailyn Farrell</div>
-            <div class="team-role">Co-Founder/Teacher</div>
-            <div style="display: flex; gap: 10px; margin-top: 20px;">
-                <button class="contact-button">
-                    <i class="fas fa-envelope"></i>
-                    Contact
-                </button>
-                <button class="info-button" onclick="openTeamModal('cailyn')">
-                    <i class="fas fa-info-circle"></i>
-                    Info
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <div class="team-card" data-scroll="900">
-        <div class="team-image" id="cailynTeamImage">
-            <img src="images/KatherineXuAbout.png" alt="Katherine Xu" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;" onload="this.parentElement.style.background='none'" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-user\'></i>'; this.parentElement.style.background='linear-gradient(135deg, var(--primary-light), var(--accent-color))'; this.parentElement.style.color='var(--primary-color)';">
-        </div>
-        <div class="team-divider"></div>
-        <div class="team-info">
-            <div class="team-name">Katherine Xu</div>
-            <div class="team-role">Co-Founder/Teacher</div>
-            <div style="display: flex; gap: 10px; margin-top: 20px;">
-                <button class="contact-button">
-                    <i class="fas fa-envelope"></i>
-                    Contact
-                </button>
-                <button class="info-button" onclick="openTeamModal('katherine')">
-                    <i class="fas fa-info-circle"></i>
-                    Info
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+                    <div class="team-card" data-scroll="800">
+                        <div class="team-image">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="team-divider"></div>
+                        <div class="team-info">
+                            <div class="team-name">Akash Saran</div>
+                            <div class="team-role">Co-Founder/Teacher</div>
+                            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                                <button class="contact-button">
+                                    <i class="fas fa-envelope"></i>
+                                    Contact
+                                </button>
+                                <button class="info-button" onclick="openTeamModal('akash')">
+                                    <i class="fas fa-info-circle"></i>
+                                    Info
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="team-card" data-scroll="850">
+                        <div class="team-image" id="cailynTeamImage">
+                            <img src="images/CailynFAbout.png" alt="Cailyn Farrell" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;" onload="this.parentElement.style.background='none'" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-user\'></i>'; this.parentElement.style.background='linear-gradient(135deg, var(--primary-light), var(--accent-color))'; this.parentElement.style.color='var(--primary-color)';">
+                        </div>
+                        <div class="team-divider"></div>
+                        <div class="team-info">
+                            <div class="team-name">Cailyn Farrell</div>
+                            <div class="team-role">Co-Founder/Teacher</div>
+                            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                                <button class="contact-button">
+                                    <i class="fas fa-envelope"></i>
+                                    Contact
+                                </button>
+                                <button class="info-button" onclick="openTeamModal('cailyn')">
+                                    <i class="fas fa-info-circle"></i>
+                                    Info
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="team-card" data-scroll="900">
+                        <div class="team-image" id="katherineTeamImage">
+                            <img src="images/KatherineXuAbout.png" alt="Katherine Xu" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;" onload="this.parentElement.style.background='none'" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-user\'></i>'; this.parentElement.style.background='linear-gradient(135deg, var(--primary-light), var(--accent-color))'; this.parentElement.style.color='var(--primary-color)';">
+                        </div>
+                        <div class="team-divider"></div>
+                        <div class="team-info">
+                            <div class="team-name">Katherine Xu</div>
+                            <div class="team-role">Co-Founder/Teacher</div>
+                            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                                <button class="contact-button">
+                                    <i class="fas fa-envelope"></i>
+                                    Contact
+                                </button>
+                                <button class="info-button" onclick="openTeamModal('katherine')">
+                                    <i class="fas fa-info-circle"></i>
+                                    Info
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- Team Member Modal -->
-<div class="team-modal" id="teamModal">
-    <div class="team-modal-content">
-        <button class="team-modal-close" onclick="closeTeamModal()">
-            <i class="fas fa-times"></i>
-        </button>
-        <div class="team-modal-header">
-            <img id="modalImage" class="team-modal-image" src="/placeholder.svg" alt="" style="display: none;">
-            <div id="modalImageDefault" class="team-modal-image default">
-                <i class="fas fa-user"></i>
+        <div class="team-modal" id="teamModal">
+            <div class="team-modal-content">
+                <button class="team-modal-close" onclick="closeTeamModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="team-modal-header">
+                    <img id="modalImage" class="team-modal-image" src="/placeholder.svg" alt="" style="display: none;">
+                    <div id="modalImageDefault" class="team-modal-image default">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="team-modal-info">
+                        <h2 id="modalName"></h2>
+                        <div id="modalRole" class="team-modal-role"></div>
+                        <div class="team-modal-school">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Poolesville High School</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="modalDescription" class="team-modal-description"></div>
             </div>
-            <div class="team-modal-info">
-                <h2 id="modalName"></h2>
-                <div id="modalRole" class="team-modal-role"></div>
-                <div class="team-modal-school">
-                    <i class="fas fa-graduation-cap"></i>
-                    <span>Poolesville High School</span>
+        </div>
+
+        <!-- Quiz Modal -->
+        <div class="quiz-modal" id="quizModal">
+            <div class="quiz-modal-content">
+                <div class="quiz-header">
+                    <h2 class="quiz-title">Human Body Fundamentals - Diagnostic Quiz</h2>
+                    <button class="quiz-close" onclick="closeQuizModal()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="quiz-progress-container">
+                    <div class="quiz-progress-info">
+                        <span class="quiz-counter" id="quizCounter">Question 1 of 10</span>
+                        <span class="quiz-percentage" id="quizPercentage">0%</span>
+                    </div>
+                    <div class="quiz-progress-bar">
+                        <div class="quiz-progress-fill" id="quizProgressFill"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question-container" id="quizQuestionContainer">
+                    <div class="quiz-question-header">
+                        <h3 class="quiz-question-title" id="quizQuestionTitle"></h3>
+                        <div class="quiz-question-meta">
+                            <span class="quiz-difficulty" id="quizDifficulty"></span>
+                            <span class="quiz-week" id="quizWeek"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-options" id="quizOptions">
+                        <!-- Options will be populated by JavaScript -->
+                    </div>
+                    
+                    <div class="quiz-buttons">
+                        <button class="quiz-back" id="quizBack" onclick="goBackQuestion()" disabled>
+                            <i class="fas fa-arrow-left"></i>
+                            Back
+                        </button>
+                        <button class="quiz-submit" id="quizSubmit" onclick="submitQuizAnswer()" disabled>
+                            Next Question
+                        </button>
+                    </div>
+                </div>
+
+                <div class="quiz-results" id="quizResults" style="display: none;">
+                    <div class="quiz-results-left">
+                        <h3>Quiz Complete!</h3>
+                        <div class="progress-ring-container">
+                            <svg class="progress-ring" width="200" height="200">
+                                <circle class="progress-ring-circle progress-ring-background" cx="100" cy="100" r="90"></circle>
+                                <circle class="progress-ring-circle progress-ring-progress" cx="100" cy="100" r="90" id="progressCircle"></circle>
+                            </svg>
+                            <div class="progress-ring-text" id="progressText">0%</div>
+                        </div>
+                        <div class="quiz-results-actions">
+                            <button class="quiz-retake" onclick="retakeQuiz()">Take Again</button>
+                            <button class="quiz-close-btn" onclick="closeQuizModal()">Close</button>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-results-right">
+                        <div class="quiz-message" id="quizMessage"></div>
+                        
+                        <div class="quiz-review" id="quizReview"></div>
+                        
+                        <div class="weak-weeks" id="weakWeeks" style="display: none;"></div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div id="modalDescription" class="team-modal-description"></div>
-    </div>
-</div>
 
         <!-- Professional Footer -->
         <footer class="footer" id="get-involved">
@@ -1511,7 +2060,6 @@
                         <ul>
                             <li><a href="#about">About Us</a></li>
                             <li><a href="#team">Our Team</a></li>
-                            <li><a href="#journey">Our Journey</a></li>
                             <li><a href="#get-involved">Get Involved</a></li>
                         </ul>
                     </div>
@@ -1558,32 +2106,128 @@
     </div>
 
     <script>
+        // Expanded Quiz Questions Pool (49 questions total - 3 additional per week)
+        const quizQuestions = [
+            // Week 1 - Intro to Human Body (6 questions)
+            { question: "How many bones are in the adult human body?", options: ["206", "208", "210", "204"], correct: 0, difficulty: "Easy", week: "Week 1" },
+            { question: "What is the largest organ in the human body?", options: ["Heart", "Liver", "Skin", "Brain"], correct: 2, difficulty: "Easy", week: "Week 1" },
+            { question: "Which body system includes bones and muscles?", options: ["Circulatory", "Musculoskeletal", "Nervous", "Digestive"], correct: 1, difficulty: "Medium", week: "Week 1" },
+            { question: "What is the basic unit of life?", options: ["Tissue", "Organ", "Cell", "System"], correct: 2, difficulty: "Easy", week: "Week 1" },
+            { question: "Which term describes the study of body structure?", options: ["Physiology", "Anatomy", "Biology", "Pathology"], correct: 1, difficulty: "Medium", week: "Week 1" },
+            { question: "How many organ systems are in the human body?", options: ["9", "10", "11", "12"], correct: 2, difficulty: "Hard", week: "Week 1" },
+            
+            // Week 2 - Circulation and Respiration (7 questions)
+            { question: "What is the main function of red blood cells?", options: ["Fight infection", "Carry oxygen", "Clot blood", "Digest food"], correct: 1, difficulty: "Easy", week: "Week 2" },
+            { question: "How many chambers does the human heart have?", options: ["2", "3", "4", "5"], correct: 2, difficulty: "Easy", week: "Week 2" },
+            { question: "Which gas do we breathe out?", options: ["Oxygen", "Nitrogen", "Carbon dioxide", "Hydrogen"], correct: 2, difficulty: "Easy", week: "Week 2" },
+            { question: "What is the normal resting heart rate for adults?", options: ["40-60 bpm", "60-100 bpm", "100-120 bpm", "120-140 bpm"], correct: 1, difficulty: "Medium", week: "Week 2" },
+            { question: "Which blood vessels carry blood away from the heart?", options: ["Veins", "Arteries", "Capillaries", "Venules"], correct: 1, difficulty: "Medium", week: "Week 2" },
+            { question: "What is the main muscle used for breathing?", options: ["Intercostals", "Diaphragm", "Pectorals", "Abdominals"], correct: 1, difficulty: "Medium", week: "Week 2" },
+            { question: "How many lobes does the right lung have?", options: ["2", "3", "4", "5"], correct: 1, difficulty: "Hard", week: "Week 2" },
+            
+            // Week 3 - Nutrition and Digestion (6 questions)
+            { question: "Where does digestion begin?", options: ["Stomach", "Small intestine", "Mouth", "Esophagus"], correct: 2, difficulty: "Easy", week: "Week 3" },
+            { question: "What is the longest part of the digestive system?", options: ["Large intestine", "Small intestine", "Esophagus", "Stomach"], correct: 1, difficulty: "Medium", week: "Week 3" },
+            { question: "Which nutrient is the body's main source of energy?", options: ["Proteins", "Fats", "Carbohydrates", "Vitamins"], correct: 2, difficulty: "Easy", week: "Week 3" },
+            { question: "What enzyme in saliva helps break down starch?", options: ["Pepsin", "Amylase", "Lipase", "Trypsin"], correct: 1, difficulty: "Hard", week: "Week 3" },
+            { question: "Which organ produces bile?", options: ["Pancreas", "Liver", "Gallbladder", "Stomach"], correct: 1, difficulty: "Medium", week: "Week 3" },
+            { question: "How long is the small intestine approximately?", options: ["10 feet", "15 feet", "20 feet", "25 feet"], correct: 2, difficulty: "Hard", week: "Week 3" },
+            
+            // Week 4 - Movement and Support (6 questions)
+            { question: "What connects muscles to bones?", options: ["Ligaments", "Tendons", "Cartilage", "Joints"], correct: 1, difficulty: "Medium", week: "Week 4" },
+            { question: "What is the strongest bone in the human body?", options: ["Skull", "Femur", "Tibia", "Humerus"], correct: 1, difficulty: "Medium", week: "Week 4" },
+            { question: "How many muscles are in the human body approximately?", options: ["400", "500", "600", "700"], correct: 2, difficulty: "Hard", week: "Week 4" },
+            { question: "What connects bone to bone?", options: ["Tendons", "Ligaments", "Cartilage", "Muscles"], correct: 1, difficulty: "Medium", week: "Week 4" },
+            { question: "Which type of muscle is found in the heart?", options: ["Skeletal", "Smooth", "Cardiac", "Voluntary"], correct: 2, difficulty: "Medium", week: "Week 4" },
+            { question: "What is the smallest bone in the human body?", options: ["Stapes", "Malleus", "Incus", "Hyoid"], correct: 0, difficulty: "Hard", week: "Week 4" },
+            
+            // Week 5 - Brain and Communication (7 questions)
+            { question: "What is the control center of the nervous system?", options: ["Heart", "Brain", "Spinal cord", "Liver"], correct: 1, difficulty: "Easy", week: "Week 5" },
+            { question: "How many main parts does the brain have?", options: ["2", "3", "4", "5"], correct: 1, difficulty: "Medium", week: "Week 5" },
+            { question: "What protects the brain?", options: ["Ribs", "Skull", "Spine", "Muscles"], correct: 1, difficulty: "Easy", week: "Week 5" },
+            { question: "Which part of the brain controls balance?", options: ["Cerebrum", "Cerebellum", "Brain stem", "Frontal lobe"], correct: 1, difficulty: "Hard", week: "Week 5" },
+            { question: "What are nerve cells called?", options: ["Neurons", "Dendrites", "Axons", "Synapses"], correct: 0, difficulty: "Medium", week: "Week 5" },
+            { question: "Which part of the brain controls breathing?", options: ["Cerebrum", "Cerebellum", "Brain stem", "Temporal lobe"], correct: 2, difficulty: "Hard", week: "Week 5" },
+            { question: "How fast do nerve impulses travel?", options: ["100 mph", "200 mph", "300 mph", "400 mph"], correct: 2, difficulty: "Hard", week: "Week 5" },
+            
+            // Week 6 - Growth and Development (6 questions)
+            { question: "Which gland is known as the 'master gland'?", options: ["Thyroid", "Adrenal", "Pituitary", "Pancreas"], correct: 2, difficulty: "Medium", week: "Week 6" },
+            { question: "What hormone helps regulate blood sugar?", options: ["Insulin", "Adrenaline", "Growth hormone", "Cortisol"], correct: 0, difficulty: "Medium", week: "Week 6" },
+            { question: "During which stage do humans grow the fastest?", options: ["Childhood", "Adolescence", "Infancy", "Adulthood"], correct: 2, difficulty: "Easy", week: "Week 6" },
+            { question: "Which hormone is responsible for growth?", options: ["Insulin", "Growth hormone", "Thyroid hormone", "Cortisol"], correct: 1, difficulty: "Medium", week: "Week 6" },
+            { question: "What controls the release of hormones?", options: ["Nervous system", "Endocrine system", "Both A and B", "Circulatory system"], correct: 2, difficulty: "Hard", week: "Week 6" },
+            { question: "Which gland produces adrenaline?", options: ["Pituitary", "Thyroid", "Adrenal", "Pancreas"], correct: 2, difficulty: "Medium", week: "Week 6" },
+            
+            // Week 7 - Immune Response (6 questions)
+            { question: "What is the body's first line of defense against germs?", options: ["White blood cells", "Antibodies", "Skin", "Stomach acid"], correct: 2, difficulty: "Easy", week: "Week 7" },
+            { question: "Which cells fight infections in the body?", options: ["Red blood cells", "White blood cells", "Platelets", "Plasma"], correct: 1, difficulty: "Easy", week: "Week 7" },
+            { question: "What do vaccines help the body develop?", options: ["Immunity", "Strength", "Energy", "Growth"], correct: 0, difficulty: "Medium", week: "Week 7" },
+            { question: "What are antibodies?", options: ["Proteins that fight germs", "Types of white blood cells", "Skin cells", "Blood vessels"], correct: 0, difficulty: "Medium", week: "Week 7" },
+            { question: "Which organ filters toxins from blood?", options: ["Kidney", "Liver", "Spleen", "Lungs"], correct: 1, difficulty: "Medium", week: "Week 7" },
+            { question: "What is the largest lymphatic organ?", options: ["Thymus", "Spleen", "Tonsils", "Lymph nodes"], correct: 1, difficulty: "Hard", week: "Week 7" },
+            
+            // Week 8 - Health and Wellness (5 questions)
+            { question: "What is homeostasis?", options: ["Body growth", "Body balance", "Body movement", "Body repair"], correct: 1, difficulty: "Medium", week: "Week 8" },
+            { question: "How many hours of sleep do children need per night?", options: ["6-8 hours", "8-10 hours", "9-11 hours", "10-12 hours"], correct: 2, difficulty: "Easy", week: "Week 8" },
+            { question: "What is the normal body temperature?", options: ["96.8°F", "97.8°F", "98.6°F", "99.6°F"], correct: 2, difficulty: "Easy", week: "Week 8" },
+            { question: "Which vitamin is produced by sunlight exposure?", options: ["Vitamin A", "Vitamin C", "Vitamin D", "Vitamin E"], correct: 2, difficulty: "Medium", week: "Week 8" },
+            { question: "What does a stethoscope measure?", options: ["Blood pressure", "Heart sounds", "Temperature", "Pulse rate"], correct: 1, difficulty: "Easy", week: "Week 8" }
+        ];
+
+        // Quiz state variables
+        let currentQuiz = [];
+        let currentQuestionIndex = 0;
+        let selectedAnswer = null;
+        let score = 0;
+        let userAnswers = [];
+        let answeredQuestions = [];
+
+        // Team member data
+        const teamMembers = {
+            akash: {
+                name: "Akash Saran",
+                role: "Co-Founder/Teacher",
+                image: null,
+                description: "Growing up in a medical family, I've been exposed to healthcare and medical instruments, sparking my passion for science. I aim to inspire young minds to explore medicine, nurture their curiosity in these fields, and foster a new generation of healthcare professionals. Through MedMD, I hope to bridge the gap between complex medical concepts and accessible education for young learners."
+            },
+            cailyn: {
+                name: "Cailyn Farrell",
+                role: "Co-Founder/Teacher",
+                image: "images/CailynFAbout.png",
+                description: "As a passionate student with aspirations in medicine, I saw firsthand how limited medical and health-care related education is to our youth. Helping found MedMD, I hope to inspire the next generation to hold interest in medicine and STEM! My goal is to make complex medical concepts accessible and engaging for young minds, fostering curiosity and passion for healthcare careers."
+            },
+            katherine: {
+                name: "Katherine Xu",
+                role: "Co-Founder/Teacher",
+                image: "images/KatherineXuAbout.png",
+                description: "I just love kids bro."
+            }
+        };
+
         // Loading Screen Management
         function initLoadingScreen() {
             const loadingScreen = document.getElementById('loadingScreen');
             const mainContainer = document.getElementById('mainContainer');
             
-            // Simulate loading time and ensure all resources are loaded
             window.addEventListener('load', () => {
                 setTimeout(() => {
                     loadingScreen.classList.add('hidden');
                     mainContainer.classList.add('loaded');
                     
-                    // Initialize everything after loading
                     setTimeout(() => {
                         createStars();
                         handleScroll();
                         initThemeSwitcher();
                         initSmoothScrolling();
                     }, 500);
-                }, 1500); // Show loading for at least 1.5 seconds
+                }, 1500);
             });
         }
 
-        // Optimized star creation with reduced count for better performance
+        // Optimized star creation
         function createStars() {
             const starsContainer = document.getElementById('starsContainer');
-            const numberOfStars = window.innerWidth < 768 ? 30 : 50; // Fewer stars on mobile
+            const numberOfStars = window.innerWidth < 768 ? 30 : 50;
             
             for (let i = 0; i < numberOfStars; i++) {
                 const star = document.createElement('div');
@@ -1591,7 +2235,7 @@
                 
                 const x = Math.random() * 100;
                 const y = Math.random() * 100;
-                const size = Math.random() * 2 + 1; // Smaller stars for better performance
+                const size = Math.random() * 2 + 1;
                 const floatDelay = Math.random() * 20;
                 const twinkleDelay = Math.random() * 5;
                 
@@ -1606,14 +2250,14 @@
             }
         }
 
-        // Optimized scroll animations with throttling
+        // Scroll animations
         function handleScroll() {
             const scrollY = window.scrollY;
             const windowHeight = window.innerHeight;
             
             const elements = document.querySelectorAll('[data-scroll]');
             elements.forEach(element => {
-                if (element.classList.contains('visible')) return; // Skip if already visible
+                if (element.classList.contains('visible')) return;
                 
                 const scrollTrigger = parseInt(element.dataset.scroll);
                 const elementTop = element.getBoundingClientRect().top + scrollY;
@@ -1624,17 +2268,16 @@
             });
         }
 
-        // Theme switcher with Font Awesome icons
+        // Theme switcher
         function initThemeSwitcher() {
             const themeSwitcher = document.getElementById('themeSwitcher');
             const themeIcon = document.getElementById('themeIcon');
             const body = document.body;
             
-            const themes = ['default', 'valentine']; //const themes = ['default', 'valentine', 'dark'];
+            const themes = ['default', 'valentine'];
             const icons = ['fas fa-sun', 'fas fa-heart', 'fas fa-moon'];
             let currentThemeIndex = 0;
             
-            // Load saved theme
             const savedTheme = localStorage.getItem('medmd-theme') || 'default';
             currentThemeIndex = themes.indexOf(savedTheme);
             body.setAttribute('data-theme', savedTheme);
@@ -1645,16 +2288,13 @@
                 const newTheme = themes[currentThemeIndex];
                 const newIcon = icons[currentThemeIndex];
                 
-                // Apply theme
                 body.setAttribute('data-theme', newTheme);
                 themeIcon.className = `theme-icon ${newIcon}`;
-                
-                // Save theme preference
                 localStorage.setItem('medmd-theme', newTheme);
             });
         }
 
-        // Smooth scrolling for navigation links
+        // Smooth scrolling
         function initSmoothScrolling() {
             const navLinks = document.querySelectorAll('a[href^="#"]');
             navLinks.forEach(link => {
@@ -1674,7 +2314,7 @@
             });
         }
 
-        // Scroll indicator function
+        // Scroll to content
         function scrollToContent() {
             const firstContentBox = document.querySelector('.content-box');
             if (firstContentBox) {
@@ -1686,17 +2326,319 @@
             }
         }
 
-        // Initialize loading screen immediately
+        // Scroll to signup
+        function scrollToSignup() {
+            const signupSection = document.getElementById('get-involved');
+            if (signupSection) {
+                const offsetTop = signupSection.getBoundingClientRect().top + window.scrollY - 100;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Quiz Functions
+        function openQuizModal() {
+            const modal = document.getElementById('quizModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            startQuiz();
+        }
+
+        function closeQuizModal() {
+            const modal = document.getElementById('quizModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            resetQuiz();
+        }
+
+        function startQuiz() {
+            // Ensure at least one question from each week
+            const questionsByWeek = {};
+            quizQuestions.forEach(q => {
+                if (!questionsByWeek[q.week]) {
+                    questionsByWeek[q.week] = [];
+                }
+                questionsByWeek[q.week].push(q);
+            });
+            
+            // Select one question from each week (8 questions)
+            currentQuiz = [];
+            Object.keys(questionsByWeek).forEach(week => {
+                const weekQuestions = questionsByWeek[week];
+                const randomQuestion = weekQuestions[Math.floor(Math.random() * weekQuestions.length)];
+                currentQuiz.push(randomQuestion);
+            });
+            
+            // Add 2 more random questions to make 10 total
+            const remainingQuestions = quizQuestions.filter(q => !currentQuiz.includes(q));
+            for (let i = 0; i < 2; i++) {
+                if (remainingQuestions.length > 0) {
+                    const randomIndex = Math.floor(Math.random() * remainingQuestions.length);
+                    currentQuiz.push(remainingQuestions.splice(randomIndex, 1)[0]);
+                }
+            }
+            
+            // Shuffle the final quiz
+            currentQuiz = currentQuiz.sort(() => Math.random() - 0.5);
+            
+            currentQuestionIndex = 0;
+            selectedAnswer = null;
+            score = 0;
+            userAnswers = [];
+            answeredQuestions = [];
+            
+            document.getElementById('quizQuestionContainer').style.display = 'flex';
+            document.getElementById('quizResults').style.display = 'none';
+            
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+            const question = currentQuiz[currentQuestionIndex];
+            const progress = (currentQuestionIndex / 10) * 100;
+            
+            // Update progress
+            document.getElementById('quizCounter').textContent = `Question ${currentQuestionIndex + 1} of 10`;
+            document.getElementById('quizPercentage').textContent = `${Math.round(progress)}%`;
+            document.getElementById('quizProgressFill').style.width = `${progress}%`;
+            
+            // Update question content
+            document.getElementById('quizQuestionTitle').textContent = question.question;
+            document.getElementById('quizDifficulty').textContent = question.difficulty;
+            document.getElementById('quizWeek').textContent = question.week;
+            
+            // Create options
+            const optionsContainer = document.getElementById('quizOptions');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'quiz-option';
+                optionElement.onclick = () => selectAnswer(index);
+                
+                optionElement.innerHTML = `
+                    <div class="quiz-option-letter">${String.fromCharCode(65 + index)}</div>
+                    <span>${option}</span>
+                `;
+                
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Update buttons
+            const backBtn = document.getElementById('quizBack');
+            const submitBtn = document.getElementById('quizSubmit');
+            
+            backBtn.disabled = currentQuestionIndex === 0;
+            submitBtn.disabled = true;
+            submitBtn.textContent = currentQuestionIndex === 9 ? 'Finish Quiz' : 'Next Question';
+            
+            // Restore previous answer if going back
+            if (answeredQuestions[currentQuestionIndex] !== undefined) {
+                selectedAnswer = answeredQuestions[currentQuestionIndex];
+                document.querySelectorAll('.quiz-option')[selectedAnswer].classList.add('selected');
+                submitBtn.disabled = false;
+            } else {
+                selectedAnswer = null;
+            }
+        }
+
+        function selectAnswer(answerIndex) {
+            // Remove previous selection
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selection to clicked option
+            document.querySelectorAll('.quiz-option')[answerIndex].classList.add('selected');
+            
+            selectedAnswer = answerIndex;
+            document.getElementById('quizSubmit').disabled = false;
+        }
+
+        function goBackQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                displayQuestion();
+            }
+        }
+
+        function submitQuizAnswer() {
+            if (selectedAnswer === null) return;
+            
+            // Store the answer
+            answeredQuestions[currentQuestionIndex] = selectedAnswer;
+            
+            currentQuestionIndex++;
+            
+            if (currentQuestionIndex < 10) {
+                displayQuestion();
+            } else {
+                calculateResults();
+                showResults();
+            }
+        }
+
+        function calculateResults() {
+            score = 0;
+            userAnswers = [];
+            
+            for (let i = 0; i < currentQuiz.length; i++) {
+                const question = currentQuiz[i];
+                const userAnswer = answeredQuestions[i];
+                const isCorrect = userAnswer === question.correct;
+                
+                if (isCorrect) score++;
+                
+                userAnswers.push({
+                    question: question.question,
+                    userAnswer: question.options[userAnswer],
+                    correctAnswer: question.options[question.correct],
+                    isCorrect: isCorrect,
+                    week: question.week,
+                    difficulty: question.difficulty
+                });
+            }
+        }
+
+        function showResults() {
+            document.getElementById('quizQuestionContainer').style.display = 'none';
+            document.getElementById('quizResults').style.display = 'flex';
+            
+            // Update progress to 100% when quiz is complete
+            document.getElementById('quizProgressFill').style.width = '100%';
+            document.getElementById('quizPercentage').textContent = '100%';
+            
+            const percentage = Math.round((score / 10) * 100);
+            
+            // Update progress ring
+            const circle = document.getElementById('progressCircle');
+            const radius = 90;
+            const circumference = 2 * Math.PI * radius;
+            const offset = circumference - (percentage / 100) * circumference;
+            
+            circle.style.strokeDasharray = circumference;
+            circle.style.strokeDashoffset = offset;
+            
+            document.getElementById('progressText').textContent = `${percentage}%`;
+            
+            // Show message based on score
+            const messageElement = document.getElementById('quizMessage');
+            if (score >= 7) {
+                messageElement.innerHTML = `Great job! You scored ${score}/10 (${percentage}%). Even though you already know a lot about the human body, our <a href="#human-body">Human Body Fundamentals</a> program can help you learn the systems as a whole in more depth and discover how they all work together!`;
+            } else {
+                messageElement.innerHTML = `You scored ${score}/10 (${percentage}%). Don't worry! Our Human Body Fundamentals program will be perfect for you to learn all these concepts so you can get them all right next time!`;
+            }
+            
+            // Show review of answers
+            showQuizReview();
+            
+            // Show weak weeks if applicable
+            showWeakWeeks();
+        }
+
+        function showQuizReview() {
+            const reviewContainer = document.getElementById('quizReview');
+            reviewContainer.innerHTML = '<h4>Review Your Answers</h4>';
+            
+            userAnswers.forEach((answer, index) => {
+                const reviewItem = document.createElement('div');
+                reviewItem.className = `review-item ${answer.isCorrect ? 'correct' : ''}`;
+                
+                reviewItem.innerHTML = `
+                    <div class="review-question">Q${index + 1}: ${answer.question}</div>
+                    <div class="review-answer ${answer.isCorrect ? 'correct' : 'incorrect'}">
+                        Your answer: ${answer.userAnswer}
+                    </div>
+                    ${!answer.isCorrect ? `<div class="review-answer correct">Correct answer: ${answer.correctAnswer}</div>` : ''}
+                `;
+                
+                reviewContainer.appendChild(reviewItem);
+            });
+        }
+
+        function showWeakWeeks() {
+            const incorrectAnswers = userAnswers.filter(answer => !answer.isCorrect);
+            
+            if (incorrectAnswers.length > 0) {
+                const weakWeeks = [...new Set(incorrectAnswers.map(answer => answer.week))];
+                
+                const weakWeeksContainer = document.getElementById('weakWeeks');
+                weakWeeksContainer.style.display = 'block';
+                
+                weakWeeksContainer.innerHTML = `
+                    <h4>Areas for Improvement</h4>
+                    <div class="weak-weeks-list">
+                        ${weakWeeks.map(week => `<span class="weak-week-tag">${week}</span>`).join('')}
+                    </div>
+                `;
+            }
+        }
+
+        function retakeQuiz() {
+            startQuiz();
+        }
+
+        function resetQuiz() {
+            currentQuiz = [];
+            currentQuestionIndex = 0;
+            selectedAnswer = null;
+            score = 0;
+            userAnswers = [];
+            answeredQuestions = [];
+        }
+
+        // Team modal functions
+        function openTeamModal(memberKey) {
+            const member = teamMembers[memberKey];
+            const modal = document.getElementById('teamModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalImageDefault = document.getElementById('modalImageDefault');
+            const modalName = document.getElementById('modalName');
+            const modalRole = document.getElementById('modalRole');
+            const modalDescription = document.getElementById('modalDescription');
+            
+            modalName.textContent = member.name;
+            modalRole.textContent = member.role;
+            modalDescription.textContent = member.description;
+            
+            if (member.image) {
+                modalImage.src = member.image;
+                modalImage.alt = member.name;
+                modalImage.onload = function() {
+                    modalImage.style.display = 'block';
+                    modalImageDefault.style.display = 'none';
+                };
+                modalImage.onerror = function() {
+                    modalImage.style.display = 'none';
+                    modalImageDefault.style.display = 'flex';
+                };
+            } else {
+                modalImage.style.display = 'none';
+                modalImageDefault.style.display = 'flex';
+            }
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeTeamModal() {
+            const modal = document.getElementById('teamModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Initialize loading screen
         initLoadingScreen();
 
-        // Optimized scroll event listener with better throttling
+        // Scroll event listener
         let ticking = false;
         let lastScrollY = 0;
         
         window.addEventListener('scroll', () => {
             const currentScrollY = window.scrollY;
             
-            // Only process if scroll difference is significant
             if (Math.abs(currentScrollY - lastScrollY) < 10) return;
             
             if (!ticking) {
@@ -1709,7 +2651,7 @@
             }
         }, { passive: true });
 
-        // Handle resize events for responsive stars
+        // Handle resize events
         let resizeTimeout;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
@@ -1722,85 +2664,26 @@
             }, 250);
         });
 
-        // Team member data
-const teamMembers = {
-    akash: {
-        name: "Akash Saran",
-        role: "Co-Founder/Teacher",
-        image: null, // No image provided
-        description: "Growing up in a medical family, I've been exposed to healthcare and medical instruments, sparking my passion for science. I aim to inspire young minds to explore medicine, nurture their curiosity in these fields, and foster a new generation of healthcare professionals. Through MedMD, I hope to bridge the gap between complex medical concepts and accessible education for young learners."
-    },
-    cailyn: {
-        name: "Cailyn Farrell",
-        role: "Co-Founder/Teacher",
-        image: "images/CailynFAbout.png",
-        description: "As a passionate student with aspirations in medicine, I saw firsthand how limited medical and health-care related education is to our youth. Helping found MedMD, I hope to inspire the next generation to hold interest in medicine and STEM! My goal is to make complex medical concepts accessible and engaging for young minds, fostering curiosity and passion for healthcare careers."
-    },
-    katherine: {
-        name: "Katherine Xu",
-        role: "Co-Founder/Teacher",
-        image: "images/KatherineXuAbout.png",
-        description: "I just love kids bro."
-    }
-};
+        // Close modals when clicking outside
+        document.getElementById('teamModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeTeamModal();
+            }
+        });
 
-// Open team modal
-function openTeamModal(memberKey) {
-    const member = teamMembers[memberKey];
-    const modal = document.getElementById('teamModal');
-    const modalImage = document.getElementById('modalImage');
-    const modalImageDefault = document.getElementById('modalImageDefault');
-    const modalName = document.getElementById('modalName');
-    const modalRole = document.getElementById('modalRole');
-    const modalDescription = document.getElementById('modalDescription');
-    
-    // Set content
-    modalName.textContent = member.name;
-    modalRole.textContent = member.role;
-    modalDescription.textContent = member.description;
-    
-    // Handle image
-    if (member.image) {
-        modalImage.src = member.image;
-        modalImage.alt = member.name;
-        modalImage.onload = function() {
-            modalImage.style.display = 'block';
-            modalImageDefault.style.display = 'none';
-        };
-        modalImage.onerror = function() {
-            modalImage.style.display = 'none';
-            modalImageDefault.style.display = 'flex';
-        };
-    } else {
-        modalImage.style.display = 'none';
-        modalImageDefault.style.display = 'flex';
-    }
-    
-    // Show modal
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
+        document.getElementById('quizModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeQuizModal();
+            }
+        });
 
-// Close team modal
-function closeTeamModal() {
-    const modal = document.getElementById('teamModal');
-    modal.classList.remove('active');
-    document.body.style.overflow = 'auto';
-}
-
-// Close modal when clicking outside
-document.getElementById('teamModal').addEventListener('click', function(e) {
-    if (e.target === this) {
-        closeTeamModal();
-    }
-});
-
-// Close modal with escape key
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        closeTeamModal();
-    }
-});
+        // Close modals with escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeTeamModal();
+                closeQuizModal();
+            }
+        });
     </script>
 </body>
 </html>
