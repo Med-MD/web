@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedMD - Programs</title>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="programs.css">
+</head>
+<body data-theme="default">
+
+<div class="container" id="mainContainer">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">MedMD</a>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="programs.html" class="nav-link active">
+                        <i class="fas fa-graduation-cap"></i>
+                        Programs
+                    </a>
+                    <div class="dropdown">
+                        <a href="human-body-fundamentals.html" class="dropdown-item">Human Body Fundamentals</a>
+                        <a href="#cellular-biology" class="dropdown-item" onclick="showConstructionPopup(event)">Cellular Biology</a>
+                        <a href="#genetics" class="dropdown-item" onclick="showConstructionPopup(event)">Genetics</a>
+                        <a href="#neuroscience" class="dropdown-item" onclick="showConstructionPopup(event)">Neuroscience</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="learning.html" class="nav-link">
+                        <i class="fas fa-brain"></i>
+                        Learn
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#get-involved" class="nav-link" onclick="showConstructionPopup(event)">
+                        <i class="fas fa-hands-helping"></i>
+                        Get Involved
+                    </a>
+                </li>
+                <li class="nav-item" id="teachNavItem" style="display: none;">
+                    <a href="#teach" class="nav-link" onclick="showConstructionPopup(event)">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        Teach
+                    </a>
+                </li>
+                <li class="nav-item" id="signinNavItem">
+                    <a href="signin.html" class="nav-link signin-btn">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Sign In
+                    </a>
+                </li>
+                <li class="nav-item" id="userNavItem" style="display: none;">
+                    <span class="user-name" id="userName">MedMDTeacher</span>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Fixed background -->
+    <div class="background"></div>
+    
+    <!-- Stars container -->
+    <div class="stars-container" id="starsContainer"></div>
+    
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <h1>Our Programs</h1>
+            <p>Comprehensive medical education programs designed to inspire and educate the next generation</p>
+        </div>
+    </div>
+
+    <!-- Content Wrapper -->
+    <div class="content-wrapper">
+        <!-- Program Information Section -->
+        <div class="content-box" data-scroll="100">
+            <h2>Program Information</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <i class="fas fa-question-circle"></i>
+                    <h4>How to Enroll</h4>
+                    <p>All programs are free and open to students in the specified age ranges. Simply click on the program you're interested in to learn more and sign up.</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h4>Schedule</h4>
+                    <p>Programs run on a seasonal basis with new cohorts starting every few months. Check individual program pages for specific dates and times.</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-laptop"></i>
+                    <h4>Format</h4>
+                    <p>We offer both online and in-person sessions depending on the program and location. All materials and resources are provided free of charge.</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-certificate"></i>
+                    <h4>Completion</h4>
+                    <p>Students who complete a program receive a certificate of completion and are eligible to enroll in advanced programs where available.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Available Programs Section -->
+        <div class="content-box" data-scroll="150">
+            <h2>Available Programs</h2>
+            <p>Explore our carefully designed educational programs that make medical learning accessible and engaging for young minds.</p>
+        </div>
+
+        <!-- Human Body Fundamentals Program Card -->
+        <div class="program-card" data-scroll="200">
+            <div class="program-card-header">
+                <div class="program-icon">
+                    <i class="fas fa-child"></i>
+                </div>
+                <div class="program-title-section">
+                    <h3>Human Body Fundamentals</h3>
+                    <p class="program-subtitle">8-Week Program</p>
+                </div>
+                <div class="program-status available">
+                    <i class="fas fa-check-circle"></i>
+                    Available Now
+                </div>
+            </div>
+            
+            <div class="program-card-content">
+                <p class="program-description">
+                    This eight-week program helps children explore the essential systems of the human body through interactive lessons. Students will gain foundational knowledge of major body systems, medical terminology, vital organs, sensory perception, health practices, and key medical tools and professions.
+                </p>
+                
+                <div class="program-highlights">
+                    <div class="highlight-item">
+                        <i class="fas fa-users"></i>
+                        <span>Ages 8-14 (3rd-8th Grade)</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>8 Weekly Sessions</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-dollar-sign"></i>
+                        <span>Completely Free</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>No Prerequisites</span>
+                    </div>
+                </div>
+                
+                <div class="program-topics">
+                    <h4>What You'll Learn:</h4>
+                    <div class="topics-grid">
+                        <div class="topic-item">
+                            <i class="fas fa-child"></i>
+                            <span>Body Systems Overview</span>
+                        </div>
+                        <div class="topic-item">
+                            <i class="fas fa-heartbeat"></i>
+                            <span>Circulation & Respiration</span>
+                        </div>
+                        <div class="topic-item">
+                            <i class="fas fa-stomach"></i>
+                            <span>Nutrition & Digestion</span>
+                        </div>
+                        <div class="topic-item">
+                            <i class="fas fa-dumbbell"></i>
+                            <span>Movement & Support</span>
+                        </div>
+                        <div class="topic-item">
+                            <i class="fas fa-brain"></i>
+                            <span>Brain & Communication</span>
+                        </div>
+                        <div class="topic-item">
+                            <i class="fas fa-seedling"></i>
+                            <span>Growth & Development</span>
+                        </div>
+                        <div class="topic-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Immune Response</span>
+                        </div>
+                        <div class="topic-item">
+                            <i class="fas fa-stethoscope"></i>
+                            <span>Health & Wellness</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="program-actions">
+                    <a href="human-body-fundamentals.html" class="program-button primary">
+                        <i class="fas fa-info-circle"></i>
+                        View Full Details
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coming Soon Programs -->
+        <div class="content-box" data-scroll="250">
+            <h2>Coming Soon</h2>
+            <p>We're constantly developing new programs to expand our educational offerings. Here's what's in development:</p>
+        </div>
+
+        <div class="program-card coming-soon" data-scroll="300">
+            <div class="program-card-header">
+                <div class="program-icon">
+                    <i class="fas fa-microscope"></i>
+                </div>
+                <div class="program-title-section">
+                    <h3>Cellular Biology</h3>
+                    <p class="program-subtitle">10-Week Program</p>
+                </div>
+                <div class="program-status coming-soon">
+                    <i class="fas fa-clock"></i>
+                    Coming Soon
+                </div>
+            </div>
+            
+            <div class="program-card-content">
+                <p class="program-description">
+                    Dive deep into the fascinating world of cells and their functions. Students will explore cellular structures, processes, and how cells work together to form tissues and organs.
+                </p>
+                
+                <div class="program-highlights">
+                    <div class="highlight-item">
+                        <i class="fas fa-users"></i>
+                        <span>Ages 8-14 (3rd-8th Grade)</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>10 Weekly Sessions</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-dollar-sign"></i>
+                        <span>Completely Free</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>No Prerequisites</span>
+                    </div>
+                </div>
+                
+                <div class="program-actions">
+                    <button class="program-button disabled" disabled>
+                        <i class="fas fa-hourglass-half"></i>
+                        In Development
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="program-card coming-soon" data-scroll="350">
+            <div class="program-card-header">
+                <div class="program-icon">
+                    <i class="fas fa-dna"></i>
+                </div>
+                <div class="program-title-section">
+                    <h3>Genetics</h3>
+                    <p class="program-subtitle">8-Week Program</p>
+                </div>
+                <div class="program-status coming-soon">
+                    <i class="fas fa-clock"></i>
+                    Coming Soon
+                </div>
+            </div>
+            
+            <div class="program-card-content">
+                <p class="program-description">
+                    Discover the secrets of heredity and genetic inheritance. Students will learn about DNA, genes, chromosomes, and how traits are passed from parents to offspring.
+                </p>
+                
+                <div class="program-highlights">
+                    <div class="highlight-item">
+                        <i class="fas fa-users"></i>
+                        <span>Ages 8-14 (3rd-8th Grade)</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>8 Weekly Sessions</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-dollar-sign"></i>
+                        <span>Completely Free</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>No Prerequisites</span>
+                    </div>
+                </div>
+                
+                <div class="program-actions">
+                    <button class="program-button disabled" disabled>
+                        <i class="fas fa-hourglass-half"></i>
+                        In Development
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="program-card coming-soon" data-scroll="400">
+            <div class="program-card-header">
+                <div class="program-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="program-title-section">
+                    <h3>Neuroscience</h3>
+                    <p class="program-subtitle">12-Week Program</p>
+                </div>
+                <div class="program-status coming-soon">
+                    <i class="fas fa-clock"></i>
+                    Coming Soon
+                </div>
+            </div>
+            
+            <div class="program-card-content">
+                <p class="program-description">
+                    Explore the complex workings of the brain and nervous system. Students will learn about neurons, brain anatomy, and how the nervous system controls behavior and cognition.
+                </p>
+                
+                <div class="program-highlights">
+                    <div class="highlight-item">
+                        <i class="fas fa-users"></i>
+                        <span>Ages 8-14 (3rd-8th Grade)</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>12 Weekly Sessions</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-dollar-sign"></i>
+                        <span>Completely Free</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>No Prerequisites</span>
+                    </div>
+                </div>
+                
+                <div class="program-actions">
+                    <button class="program-button disabled" disabled>
+                        <i class="fas fa-hourglass-half"></i>
+                        In Development
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Under Construction Popup -->
+    <div class="construction-popup" id="constructionPopup">
+        <h3><i class="fas fa-construction"></i> Under Construction</h3>
+        <p>This part of the website is currently under construction and will be updated later. Thank you for your patience!</p>
+        <button onclick="closeConstructionPopup()">Got it!</button>
+    </div>
+
+    <!-- Professional Footer -->
+    <footer class="footer" id="get-involved">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-contact">
+                        <div class="footer-contact-item">
+                            <i class="fas fa-comments"></i>
+                            <span>Get Involved Today</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:medmdofficial@gmail.com">medmdofficial@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Programs</h3>
+                    <ul>
+                        <li><a href="programs.html">All Programs</a></li>
+                        <li><a href="human-body-fundamentals.html">Human Body Fundamentals</a></li>
+                        <li><a href="#cellular-biology" onclick="showConstructionPopup(event)">Cellular Biology (Coming Soon)</a></li>
+                        <li><a href="#genetics" onclick="showConstructionPopup(event)">Genetics (Coming Soon)</a></li>
+                        <li><a href="#neuroscience" onclick="showConstructionPopup(event)">Neuroscience (Coming Soon)</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Organization</h3>
+                    <ul>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#team">Our Team</a></li>
+                        <li><a href="#get-involved">Get Involved</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#volunteer" onclick="showConstructionPopup(event)">Volunteer</a></li>
+                        <li><a href="#donate" onclick="showConstructionPopup(event)">Donate</a></li>
+                        <li><a href="#start-chapter" onclick="showConstructionPopup(event)">Start Chapter</a></li>
+                        <li><a href="learning.html">Educational Materials</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-social">
+                    <div class="footer-social-links">
+                        <a href="mailto:medmdofficial@gmail.com" class="footer-social-link" title="Gmail">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="#" class="footer-social-link" title="Facebook" onclick="showConstructionPopup(event)">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://nextdoor.com/login/?next=/profile/019RNz8WggcYM6PNr" class="footer-social-link" title="Nextdoor">
+                            <i class="fas fa-home"></i>
+                        </a>
+                        <a href="#" class="footer-social-link" title="LinkedIn" onclick="showConstructionPopup(event)">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div>&copy; 2024 MedMD. All rights reserved.</div>
+                <div>Empowering Future Healthcare Providers</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Switcher -->
+    <div class="theme-switcher" id="themeSwitcher">
+        <i class="theme-icon fas fa-sun" id="themeIcon"></i>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

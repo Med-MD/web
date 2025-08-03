@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedMD - Teacher Sign In</title>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="signin.css">
+</head>
+<body data-theme="default">
+
+<div class="container" id="mainContainer">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">MedMD</a>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="programs.html" class="nav-link">
+                        <i class="fas fa-graduation-cap"></i>
+                        Programs
+                    </a>
+                    <div class="dropdown">
+                        <a href="human-body-fundamentals.html" class="dropdown-item">Human Body Fundamentals</a>
+                        <a href="#cellular-biology" class="dropdown-item" onclick="showConstructionPopup(event)">Cellular Biology</a>
+                        <a href="#genetics" class="dropdown-item" onclick="showConstructionPopup(event)">Genetics</a>
+                        <a href="#neuroscience" class="dropdown-item" onclick="showConstructionPopup(event)">Neuroscience</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="learning.html" class="nav-link">
+                        <i class="fas fa-brain"></i>
+                        Learn
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#get-involved" class="nav-link" onclick="showConstructionPopup(event)">
+                        <i class="fas fa-hands-helping"></i>
+                        Get Involved
+                    </a>
+                </li>
+                <li class="nav-item" id="teachNavItem" style="display: none;">
+                    <a href="#teach" class="nav-link" onclick="showConstructionPopup(event)">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        Teach
+                    </a>
+                </li>
+                <li class="nav-item" id="signinNavItem">
+                    <a href="signin.html" class="nav-link signin-btn active">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Sign In
+                    </a>
+                </li>
+                <li class="nav-item" id="userNavItem" style="display: none;">
+                    <span class="user-name" id="userName">MedMDTeacher</span>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Fixed background -->
+    <div class="background"></div>
+    
+    <!-- Stars container -->
+    <div class="stars-container" id="starsContainer"></div>
+    
+    <!-- Sign In Section -->
+    <div class="signin-section">
+        <div class="signin-container">
+            <div class="signin-header">
+                <h1>Teacher Sign In</h1>
+                <p>Access your MedMD teacher account</p>
+            </div>
+
+            <div class="teacher-notice">
+                <p><i class="fas fa-info-circle"></i> This portal is exclusively for MedMD teachers and staff</p>
+            </div>
+            
+            <form class="signin-form" id="signinForm" onsubmit="handleSignIn(event)">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <div class="input-container">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="error-message" id="usernameError"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-container">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+                
+                <button type="submit" class="signin-button" id="signinButton">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Sign In
+                </button>
+
+                <div class="validation-errors" id="validationErrors" style="display: none;">
+                    <ul id="errorsList"></ul>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Under Construction Popup -->
+    <div class="construction-popup" id="constructionPopup">
+        <h3><i class="fas fa-construction"></i> Under Construction</h3>
+        <p>This part of the website is currently under construction and will be updated later. Thank you for your patience!</p>
+        <button onclick="closeConstructionPopup()">Got it!</button>
+    </div>
+
+    <!-- Professional Footer -->
+    <footer class="footer" id="get-involved">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-contact">
+                        <div class="footer-contact-item">
+                            <i class="fas fa-comments"></i>
+                            <span>Get Involved Today</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:medmdofficial@gmail.com">medmdofficial@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Programs</h3>
+                    <ul>
+                        <li><a href="programs.html">All Programs</a></li>
+                        <li><a href="human-body-fundamentals.html">Human Body Fundamentals</a></li>
+                        <li><a href="#cellular-biology" onclick="showConstructionPopup(event)">Cellular Biology (Coming Soon)</a></li>
+                        <li><a href="#genetics" onclick="showConstructionPopup(event)">Genetics (Coming Soon)</a></li>
+                        <li><a href="#neuroscience" onclick="showConstructionPopup(event)">Neuroscience (Coming Soon)</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Organization</h3>
+                    <ul>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#team">Our Team</a></li>
+                        <li><a href="#get-involved">Get Involved</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#volunteer" onclick="showConstructionPopup(event)">Volunteer</a></li>
+                        <li><a href="#donate" onclick="showConstructionPopup(event)">Donate</a></li>
+                        <li><a href="#start-chapter" onclick="showConstructionPopup(event)">Start Chapter</a></li>
+                        <li><a href="learning.html">Educational Materials</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-social">
+                    <div class="footer-social-links">
+                        <a href="mailto:medmdofficial@gmail.com" class="footer-social-link" title="Gmail">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="#" class="footer-social-link" title="Facebook" onclick="showConstructionPopup(event)">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://nextdoor.com/login/?next=/profile/019RNz8WggcYM6PNr" class="footer-social-link" title="Nextdoor">
+                            <i class="fas fa-home"></i>
+                        </a>
+                        <a href="#" class="footer-social-link" title="LinkedIn" onclick="showConstructionPopup(event)">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div>&copy; 2024 MedMD. All rights reserved.</div>
+                <div>Empowering Future Healthcare Providers</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Switcher -->
+    <div class="theme-switcher" id="themeSwitcher">
+        <i class="theme-icon fas fa-sun" id="themeIcon"></i>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

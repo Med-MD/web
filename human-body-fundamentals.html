@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedMD - Human Body Fundamentals</title>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="programs.css">
+</head>
+<body data-theme="default">
+<!-- Loading Screen -->
+<div class="loading-screen" id="loadingScreen">
+    <div class="loading-logo">MedMD</div>
+    <div class="loading-spinner">
+        <i class="fas fa-dna"></i>
+    </div>
+    <div class="loading-text">Loading Program Details...</div>
+</div>
+
+<div class="container" id="mainContainer">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">MedMD</a>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="programs.html" class="nav-link">
+                        <i class="fas fa-graduation-cap"></i>
+                        Programs
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="learning.html" class="nav-link">
+                        <i class="fas fa-brain"></i>
+                        Learn
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#get-involved" class="nav-link" onclick="showConstructionPopup(event)">
+                        <i class="fas fa-hands-helping"></i>
+                        Get Involved
+                    </a>
+                </li>
+                <li class="nav-item" id="teachNavItem" style="display: none;">
+                    <a href="#teach" class="nav-link" onclick="showConstructionPopup(event)">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        Teach
+                    </a>
+                </li>
+                <li class="nav-item" id="signinNavItem">
+                    <a href="signin.html" class="nav-link signin-btn">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Sign In
+                    </a>
+                </li>
+                <li class="nav-item" id="userNavItem" style="display: none;">
+                    <span class="user-name" id="userName">MedMDTeacher</span>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Fixed background -->
+    <div class="background"></div>
+    
+    <!-- Stars container -->
+    <div class="stars-container" id="starsContainer"></div>
+    
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <h1>Human Body Fundamentals</h1>
+            <p>An 8-week interactive journey through the amazing systems of the human body</p>
+        </div>
+    </div>
+
+    <!-- Content Wrapper -->
+    <div class="content-wrapper">
+        <!-- Program Details -->
+        <div class="program-details" data-scroll="100">
+            <div class="program-title">Human Body Fundamentals</div>
+            <div class="program-description">
+                This eight-week program helps children explore the essential systems of the human body through interactive lessons. Students will gain foundational knowledge of major body systems, medical terminology, vital organs, sensory perception, health practices, and key medical tools and professions.
+            </div>
+            
+            <div class="program-info">
+                <div class="info-item">
+                    <div class="info-label">Age Range</div>
+                    <div class="info-value">8 - 14 years</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Grade Levels</div>
+                    <div class="info-value">3rd - 8th Grade</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Prerequisites</div>
+                    <div class="info-value">None Required</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Cost</div>
+                    <div class="info-value">Free</div>
+                </div>
+            </div>
+            
+            <div class="program-buttons">
+                <button class="signup-button" onclick="openSignupModal()">
+                    <i class="fas fa-user-plus"></i>
+                    Sign Up for Program
+                </button>
+                <button class="quiz-button" onclick="openQuizModal()">
+                    <i class="fas fa-brain"></i>
+                    Take Diagnostic Quiz
+                </button>
+            </div>
+        </div>
+
+        <!-- 8 Week Program Grid -->
+        <div class="weeks-grid">
+            <div class="week-card" data-scroll="150" onclick="openWeekModal('week1')">
+                <div class="week-icon">
+                    <i class="fas fa-child"></i>
+                </div>
+                <div class="week-number">Week 1</div>
+                <div class="week-title">Intro to the Human Body</div>
+                <div class="week-description">Overview of body systems, basic anatomy, and introduction to medical terminology.</div>
+            </div>
+            
+            <div class="week-card" data-scroll="170" onclick="openWeekModal('week2')">
+                <div class="week-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <div class="week-number">Week 2</div>
+                <div class="week-title">Circulation and Respiration</div>
+                <div class="week-description">Explore the circulatory and respiratory systems, blood flow, and breathing mechanisms.</div>
+            </div>
+            
+            <div class="week-card" data-scroll="190" onclick="openWeekModal('week3')">
+                <div class="week-icon">
+                    <i class="fas fa-stomach"></i>
+                </div>
+                <div class="week-number">Week 3</div>
+                <div class="week-title">Nutrition and Digestion</div>
+                <div class="week-description">Understanding nutrition, the digestive system, and how the body processes food.</div>
+            </div>
+            
+            <div class="week-card" data-scroll="210" onclick="openWeekModal('week4')">
+                <div class="week-icon">
+                    <i class="fas fa-dumbbell"></i>
+                </div>
+                <div class="week-number">Week 4</div>
+                <div class="week-title">Movement and Support</div>
+                <div class="week-description">Study the musculoskeletal system, bones, muscles, tissues, joints, and how movement occurs.</div>
+            </div>
+            
+            <div class="week-card" data-scroll="230" onclick="openWeekModal('week5')">
+                <div class="week-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="week-number">Week 5</div>
+                <div class="week-title">The Brain and Communication</div>
+                <div class="week-description">Discover the nervous system, the brain, and how the body communicates actions.</div>
+            </div>
+            
+            <div class="week-card" data-scroll="250" onclick="openWeekModal('week6')">
+                <div class="week-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <div class="week-number">Week 6</div>
+                <div class="week-title">Growth, Development, and Emotions</div>
+                <div class="week-description">Learn about human development, the endocrine system, and hormones.</div>
+            </div>
+            
+            <div class="week-card" data-scroll="270" onclick="openWeekModal('week7')">
+                <div class="week-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="week-number">Week 7</div>
+                <div class="week-title">The Immune Response</div>
+                <div class="week-description">Understand the integumentary system and how different white blood cells protect against disease.</div>
+            </div>
+            
+            <div class="week-card" data-scroll="290" onclick="openWeekModal('week8')">
+                <div class="week-icon">
+                    <i class="fas fa-stethoscope"></i>
+                </div>
+                <div class="week-number">Week 8</div>
+                <div class="week-title">Health and Wellness</div>
+                <div class="week-description">Explore homeostasis, best health practices, and different medical professions.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="signup-modal" id="signupModal">
+        <div class="signup-modal-content">
+            <div class="signup-header">
+                <h2 class="signup-title">Sign Up for Human Body Fundamentals</h2>
+                <button class="signup-close" onclick="closeSignupModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="toggle-container">
+                <div class="toggle-wrapper">
+                    <div class="toggle-option">
+                        <input type="radio" id="online" name="program-type" value="online" checked>
+                        <label for="online">Online</label>
+                    </div>
+                    <div class="toggle-option">
+                        <input type="radio" id="inperson" name="program-type" value="inperson">
+                        <label for="inperson">In-Person</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="signup-content">
+                <div class="signup-section active" id="onlineSection">
+                    <div class="online-message">
+                        <i class="fas fa-laptop"></i>
+                        <h3>Online Programs</h3>
+                        <p>No Programs Available at the Moment :(</p>
+                        <p>Check back in September for our exciting online offerings!</p>
+                    </div>
+                </div>
+
+                <div class="signup-section" id="inpersonSection">
+                    <div class="inperson-content">
+                        <h3>In-Person Program Details</h3>
+                        
+                        <div class="course-overview">
+                            <h4>Course Overview</h4>
+                            <div class="course-info-grid">
+                                <div class="course-info-item">
+                                    <div class="course-info-label">Age Range</div>
+                                    <div class="course-info-value">8 - 14 years</div>
+                                </div>
+                                <div class="course-info-item">
+                                    <div class="course-info-label">Grade Levels</div>
+                                    <div class="course-info-value">3rd - 8th Grade</div>
+                                </div>
+                                <div class="course-info-item">
+                                    <div class="course-info-label">Prerequisites</div>
+                                    <div class="course-info-value">None Required</div>
+                                </div>
+                                <div class="course-info-item">
+                                    <div class="course-info-label">Cost</div>
+                                    <div class="course-info-value">Free</div>
+                                </div>
+                            </div>
+                            <div class="course-contact">
+                                For any questions or updates about the program, please contact us at 
+                                <a href="mailto:medmdofficial@gmail.com">medmdofficial@gmail.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="location-info">
+                            <div class="location-name">Germantown Library</div>
+                            <div class="location-address">19840 Century Blvd<br>Germantown, MD 20874</div>
+                        </div>
+
+                        <div class="scroll-indicator-container">
+                            <div class="scroll-indicator-text">
+                                <span>Scroll down to see schedule and registration form</span>
+                                <i class="fas fa-chevron-down scroll-indicator-arrow"></i>
+                            </div>
+                        </div>
+
+                        <div class="schedule-grid">
+                            <div class="schedule-card">
+                                <div class="schedule-week">Week 1</div>
+                                <div class="schedule-title">Intro to the Human Body</div>
+                                <div class="schedule-details">
+                                    10:00 AM - 11:00 AM<br>
+                                    Monday, August 11, 2025
+                                </div>
+                            </div>
+                            
+                            <div class="schedule-card">
+                                <div class="schedule-week">Week 2</div>
+                                <div class="schedule-title">Circulation and Respiration</div>
+                                <div class="schedule-details">
+                                    10:00 AM - 11:00 AM<br>
+                                    Monday, August 18, 2025
+                                </div>
+                            </div>
+                            
+                            <div class="schedule-card">
+                                <div class="schedule-week">Week 3</div>
+                                <div class="schedule-title">Nutrition and Digestion</div>
+                                <div class="schedule-details">
+                                    10:00 AM - 11:00 AM<br>
+                                    Monday, August 25, 2025
+                                </div>
+                            </div>
+                            
+                            <div class="schedule-card">
+                                <div class="schedule-week">Week 4</div>
+                                <div class="schedule-title">Movement and Support</div>
+                                <div class="schedule-details">
+                                    10:00 AM - 11:00 AM<br>
+                                    Monday, September 1, 2025
+                                </div>
+                            </div>
+                            
+                            <div class="schedule-card">
+                                <div class="schedule-week">Week 5</div>
+                                <div class="schedule-title">The Brain and Communication</div>
+                                <div class="schedule-details">
+                                    10:00 AM - 11:00 AM<br>
+                                    Monday, September 8, 2025
+                                </div>
+                            </div>
+                            
+                            <div class="schedule-card">
+                                <div class="schedule-week">Week 6</div>
+                                <div class="schedule-title">Growth, Development, and Emotions</div>
+                                <div class="schedule-details">
+                                    10:00 AM - 11:00 AM<br>
+                                    Monday, September 15, 2025
+                                </div>
+                            </div>
+                            
+                            <div class="schedule-card">
+                                <div class="schedule-week">Week 7</div>
+                                <div class="schedule-title">The Immune Response</div>
+                                <div class="schedule-details">
+                                    10:00 AM - 11:00 AM<br>
+                                    Monday, September 22, 2025
+                                </div>
+                            </div>
+                            
+                            <div class="schedule-card">
+                                <div class="schedule-week">Week 8</div>
+                                <div class="schedule-title">Health and Wellness</div>
+                                <div class="schedule-details">
+                                    10:00 AM - 11:00 AM<br>
+                                    Monday, September 29, 2025
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-container">
+                            <div class="form-embed">
+                                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScKQOBpvThyi4adlIcT6W7Bhb_gdYS6f3weLXIlKq6ZsXn67g/viewform?embedded=true" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                            </div>
+                            <div class="form-actions">
+                                <a href="https://docs.google.com/forms/d/e/1FAIpQLScKQOBpvThyi4adlIcT6W7Bhb_gdYS6f3weLXIlKq6ZsXn67g/viewform" target="_blank" class="form-button">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    Open in New Tab
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Modal -->
+    <div class="quiz-modal" id="quizModal">
+        <div class="quiz-modal-content">
+            <div class="quiz-header">
+                <h2 class="quiz-title">Human Body Fundamentals - Diagnostic Quiz</h2>
+                <button class="quiz-close" onclick="closeQuizModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="quiz-progress-container">
+                <div class="quiz-progress-info">
+                    <span class="quiz-counter" id="quizCounter">Question 1 of 10</span>
+                    <span class="quiz-percentage" id="quizPercentage">0%</span>
+                </div>
+                <div class="quiz-progress-bar">
+                    <div class="quiz-progress-fill" id="quizProgressFill"></div>
+                </div>
+            </div>
+
+            <div class="quiz-question-container" id="quizQuestionContainer">
+                <div class="quiz-question-header">
+                    <h3 class="quiz-question-title" id="quizQuestionTitle"></h3>
+                    <div class="quiz-question-meta">
+                        <span class="quiz-difficulty" id="quizDifficulty"></span>
+                        <span class="quiz-week" id="quizWeek"></span>
+                    </div>
+                </div>
+                
+                <div class="quiz-options" id="quizOptions">
+                    <!-- Options will be populated by JavaScript -->
+                </div>
+                
+                <div class="quiz-buttons">
+                    <button class="quiz-back" id="quizBack" onclick="goBackQuestion()" disabled>
+                        <i class="fas fa-arrow-left"></i>
+                        Back
+                    </button>
+                    <button class="quiz-submit" id="quizSubmit" onclick="submitQuizAnswer()" disabled>
+                        Next Question
+                    </button>
+                </div>
+            </div>
+
+            <div class="quiz-results" id="quizResults" style="display: none;">
+                <div class="quiz-results-left">
+                    <h3>Quiz Complete!</h3>
+                    <div class="progress-ring-container">
+                        <svg class="progress-ring" width="200" height="200">
+                            <circle class="progress-ring-circle progress-ring-background" cx="100" cy="100" r="90"></circle>
+                            <circle class="progress-ring-circle progress-ring-progress" cx="100" cy="100" r="90" id="progressCircle"></circle>
+                        </svg>
+                        <div class="progress-ring-text" id="progressText">0%</div>
+                    </div>
+                    <div class="quiz-results-actions">
+                        <button class="quiz-retake" onclick="retakeQuiz()">Take Again</button>
+                        <button class="quiz-close-btn" onclick="closeQuizModal()">Close</button>
+                    </div>
+                </div>
+                
+                <div class="quiz-results-right">
+                    <div class="quiz-message" id="quizMessage"></div>
+                    
+                    <div class="quiz-review" id="quizReview"></div>
+                    
+                    <div class="weak-weeks" id="weakWeeks" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Week Modal -->
+    <div class="week-modal" id="weekModal">
+        <div class="week-modal-content">
+            <button class="week-modal-close" onclick="closeWeekModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="week-modal-header">
+                <div class="week-modal-icon" id="weekModalIcon">
+                    <i class="fas fa-child"></i>
+                </div>
+                <div class="week-modal-number" id="weekModalNumber">Week 1</div>
+                <h2 class="week-modal-title" id="weekModalTitle">Intro to the Human Body</h2>
+            </div>
+            <div class="week-modal-description" id="weekModalDescription">
+                Overview of body systems, basic anatomy, and introduction to medical terminology.
+            </div>
+            <div class="week-modal-actions">
+                <button class="week-action-button" onclick="closeWeekModal(); openSignupModal();">
+                    <i class="fas fa-user-plus"></i>
+                    Sign Up for Course
+                </button>
+                <button class="week-action-button secondary" onclick="closeWeekModal(); window.location.href='learning.html';">
+                    <i class="fas fa-microscope"></i>
+                    Explore Organs
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Under Construction Popup -->
+    <div class="construction-popup" id="constructionPopup">
+        <h3><i class="fas fa-construction"></i> Under Construction</h3>
+        <p>This part of the website is currently under construction and will be updated later. Thank you for your patience!</p>
+        <button onclick="closeConstructionPopup()">Got it!</button>
+    </div>
+
+    <!-- Professional Footer -->
+    <footer class="footer" id="get-involved">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-contact">
+                        <div class="footer-contact-item">
+                            <i class="fas fa-comments"></i>
+                            <span>Get Involved Today</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:medmdofficial@gmail.com">medmdofficial@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Programs</h3>
+                    <ul>
+                        <li><a href="programs.html">All Programs</a></li>
+                        <li><a href="human-body-fundamentals.html">Human Body Fundamentals</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Organization</h3>
+                    <ul>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#team">Our Team</a></li>
+                        <li><a href="#get-involved">Get Involved</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#volunteer" onclick="showConstructionPopup(event)">Volunteer</a></li>
+                        <li><a href="#donate" onclick="showConstructionPopup(event)">Donate</a></li>
+                        <li><a href="#start-chapter" onclick="showConstructionPopup(event)">Start Chapter</a></li>
+                        <li><a href="learning.html">Educational Materials</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-social">
+                    <div class="footer-social-links">
+                        <a href="mailto:medmdofficial@gmail.com" class="footer-social-link" title="Gmail">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="#" class="footer-social-link" title="Facebook" onclick="showConstructionPopup(event)">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://nextdoor.com/login/?next=/profile/019RNz8WggcYM6PNr" class="footer-social-link" title="Nextdoor">
+                            <i class="fas fa-home"></i>
+                        </a>
+                        <a href="#" class="footer-social-link" title="LinkedIn" onclick="showConstructionPopup(event)">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div>&copy; 2024 MedMD. All rights reserved.</div>
+                <div>Empowering Future Healthcare Providers</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Switcher -->
+    <div class="theme-switcher" id="themeSwitcher">
+        <i class="theme-icon fas fa-sun" id="themeIcon"></i>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

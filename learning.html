@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedMD - Learning</title>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="learning.css">
+</head>
+<body data-theme="default">
+
+<div class="container" id="mainContainer">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">MedMD</a>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="programs.html" class="nav-link">
+                        <i class="fas fa-graduation-cap"></i>
+                        Programs
+                    </a>
+                    <div class="dropdown">
+                        <a href="human-body-fundamentals.html" class="dropdown-item">Human Body Fundamentals</a>
+                        <a href="#cellular-biology" class="dropdown-item" onclick="showConstructionPopup(event)">Cellular Biology</a>
+                        <a href="#genetics" class="dropdown-item" onclick="showConstructionPopup(event)">Genetics</a>
+                        <a href="#neuroscience" class="dropdown-item" onclick="showConstructionPopup(event)">Neuroscience</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="learning.html" class="nav-link active">
+                        <i class="fas fa-brain"></i>
+                        Learn
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#get-involved" class="nav-link" onclick="showConstructionPopup(event)">
+                        <i class="fas fa-hands-helping"></i>
+                        Get Involved
+                    </a>
+                </li>
+                <li class="nav-item" id="teachNavItem" style="display: none;">
+                    <a href="#teach" class="nav-link" onclick="showConstructionPopup(event)">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        Teach
+                    </a>
+                </li>
+                <li class="nav-item" id="signinNavItem">
+                    <a href="signin.html" class="nav-link signin-btn">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Sign In
+                    </a>
+                </li>
+                <li class="nav-item" id="userNavItem" style="display: none;">
+                    <span class="user-name" id="userName">MedMDTeacher</span>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Fixed background -->
+    <div class="background"></div>
+    
+    <!-- Stars container -->
+    <div class="stars-container" id="starsContainer"></div>
+    
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <h1>Learning</h1>
+            <p>Explore the amazing organs and systems that make up the human body</p>
+        </div>
+    </div>
+
+    <!-- Content Wrapper -->
+    <div class="content-wrapper">
+        <!-- Learn Section Introduction -->
+        <div class="content-box" data-scroll="100">
+            <h2>Discover the Human Body</h2>
+            <p>Welcome to our learning section! Here you can explore detailed information about the vital organs and systems that keep our bodies functioning. Each organ comes with comprehensive descriptions, system connections, and fascinating facts that will help you understand how our amazing bodies work.</p>
+        </div>
+
+        <!-- Organs Grid -->
+        <div class="organs-grid">
+            <div class="organ-card" data-scroll="150" onclick="openOrganModal('heart')">
+                <div class="organ-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="organ-name">Heart</div>
+                <div class="organ-system">Circulatory System</div>
+            </div>
+            
+            <div class="organ-card" data-scroll="170" onclick="openOrganModal('lungs')">
+                <div class="organ-icon">
+                    <i class="fas fa-wind"></i>
+                </div>
+                <div class="organ-name">Lungs</div>
+                <div class="organ-system">Respiratory System</div>
+            </div>
+            
+            <div class="organ-card" data-scroll="190" onclick="openOrganModal('brain')">
+                <div class="organ-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="organ-name">Brain</div>
+                <div class="organ-system">Nervous System</div>
+            </div>
+
+            <div class="organ-card" data-scroll="210" onclick="openOrganModal('mouth')">
+                <div class="organ-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <div class="organ-name">Mouth</div>
+                <div class="organ-system">Digestive System</div>
+            </div>
+
+            <div class="organ-card" data-scroll="230" onclick="openOrganModal('esophagus')">
+                <div class="organ-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <div class="organ-name">Esophagus</div>
+                <div class="organ-system">Digestive System</div>
+            </div>
+
+            <div class="organ-card" data-scroll="250" onclick="openOrganModal('stomach')">
+                <div class="organ-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <div class="organ-name">Stomach</div>
+                <div class="organ-system">Digestive System</div>
+            </div>
+
+            <div class="organ-card" data-scroll="270" onclick="openOrganModal('liver')">
+                <div class="organ-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <div class="organ-name">Liver</div>
+                <div class="organ-system">Digestive System</div>
+            </div>
+            
+            <div class="organ-card" data-scroll="290" onclick="openOrganModal('gallbladder')">
+                <div class="organ-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <div class="organ-name">Gallbladder</div>
+                <div class="organ-system">Digestive System</div>
+            </div>
+            
+            <div class="organ-card" data-scroll="310" onclick="openOrganModal('small-intestine')">
+                <div class="organ-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <div class="organ-name">Small Intestine</div>
+                <div class="organ-system">Digestive System</div>
+            </div>
+            
+            <div class="organ-card" data-scroll="330" onclick="openOrganModal('large-intestine')">
+                <div class="organ-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <div class="organ-name">Large Intestine</div>
+                <div class="organ-system">Digestive System</div>
+            </div>
+
+            <div class="organ-card" data-scroll="350" onclick="openOrganModal('pancreas')">
+                <div class="organ-icon">
+                    <i class="fas fa-pills"></i>
+                </div>
+                <div class="organ-name">Pancreas</div>
+                <div class="organ-system">Endocrine System</div>
+            </div>
+            
+            <div class="organ-card" data-scroll="370" onclick="openOrganModal('kidneys')">
+                <div class="organ-icon">
+                    <i class="fas fa-kidneys"></i>
+                </div>
+                <div class="organ-name">Kidneys</div>
+                <div class="organ-system">Urinary System</div>
+            </div>
+
+            <div class="organ-card" data-scroll="390" onclick="openOrganModal('diaphragm')">
+                <div class="organ-icon">
+                    <i class="fas fa-wind"></i>
+                </div>
+                <div class="organ-name">Diaphragm</div>
+                <div class="organ-system">Respiratory System</div>
+            </div>
+            
+            <div class="organ-card" data-scroll="410" onclick="openOrganModal('spleen')">
+                <div class="organ-icon">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div class="organ-name">Spleen</div>
+                <div class="organ-system">Immune System</div>
+            </div>
+            
+            <div class="organ-card" data-scroll="430" onclick="openOrganModal('thymus')">
+                <div class="organ-icon">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div class="organ-name">Thymus</div>
+                <div class="organ-system">Immune System</div>
+            </div>
+        </div>
+
+        <!-- Learning Resources -->
+        <div class="content-box learning-resources" data-scroll="450">
+            <h2>Learning Resources</h2>
+            <p>Want to dive deeper into human anatomy and physiology? Check out our comprehensive human body fundamentals program that covers all these organs and systems in detail!</p>
+            <div class="learning-cta">
+                <button class="cta-button primary" onclick="window.location.href='human-body-fundamentals.html'">
+                    <i class="fas fa-graduation-cap"></i>
+                    Explore Program
+                </button>
+                <button class="cta-button secondary" onclick="window.location.href='programs.html'">
+                    <i class="fas fa-list"></i>
+                    View All Programs
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Organ Modal -->
+    <div class="organ-modal" id="organModal">
+        <div class="organ-modal-content">
+            <button class="organ-modal-close" onclick="closeOrganModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="organ-modal-header">
+                <div class="organ-modal-icon" id="organModalIcon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h2 class="organ-modal-title" id="organModalTitle">Heart</h2>
+                <div class="organ-modal-system" id="organModalSystem">Circulatory System</div>
+            </div>
+            <div class="organ-modal-description" id="organModalDescription">
+                The heart is a muscular organ that pumps blood throughout your body.
+            </div>
+            <div class="organ-modal-cta">
+                <h4>Want to Learn More?</h4>
+                <p>Discover how this organ works with other body systems in our Human Body Fundamentals program!</p>
+                <button class="organ-cta-button" onclick="closeOrganModal(); window.location.href='human-body-fundamentals.html';">
+                    <i class="fas fa-graduation-cap"></i>
+                    Sign Up for Course
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Under Construction Popup -->
+    <div class="construction-popup" id="constructionPopup">
+        <h3><i class="fas fa-construction"></i> Under Construction</h3>
+        <p>This part of the website is currently under construction and will be updated later. Thank you for your patience!</p>
+        <button onclick="closeConstructionPopup()">Got it!</button>
+    </div>
+
+    <!-- Professional Footer -->
+    <footer class="footer" id="get-involved">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-contact">
+                        <div class="footer-contact-item">
+                            <i class="fas fa-comments"></i>
+                            <span>Get Involved Today</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:medmdofficial@gmail.com">medmdofficial@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Programs</h3>
+                    <ul>
+                        <li><a href="programs.html">All Programs</a></li>
+                        <li><a href="human-body-fundamentals.html">Human Body Fundamentals</a></li>
+                        <li><a href="#cellular-biology" onclick="showConstructionPopup(event)">Cellular Biology (Coming Soon)</a></li>
+                        <li><a href="#genetics" onclick="showConstructionPopup(event)">Genetics (Coming Soon)</a></li>
+                        <li><a href="#neuroscience" onclick="showConstructionPopup(event)">Neuroscience (Coming Soon)</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Organization</h3>
+                    <ul>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#team">Our Team</a></li>
+                        <li><a href="#get-involved">Get Involved</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#volunteer" onclick="showConstructionPopup(event)">Volunteer</a></li>
+                        <li><a href="#donate" onclick="showConstructionPopup(event)">Donate</a></li>
+                        <li><a href="#start-chapter" onclick="showConstructionPopup(event)">Start Chapter</a></li>
+                        <li><a href="learning.html">Educational Materials</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-social">
+                    <div class="footer-social-links">
+                        <a href="mailto:medmdofficial@gmail.com" class="footer-social-link" title="Gmail">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="#" class="footer-social-link" title="Facebook" onclick="showConstructionPopup(event)">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://nextdoor.com/login/?next=/profile/019RNz8WggcYM6PNr" class="footer-social-link" title="Nextdoor">
+                            <i class="fas fa-home"></i>
+                        </a>
+                        <a href="#" class="footer-social-link" title="LinkedIn" onclick="showConstructionPopup(event)">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div>&copy; 2024 MedMD. All rights reserved.</div>
+                <div>Empowering Future Healthcare Providers</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Switcher -->
+    <div class="theme-switcher" id="themeSwitcher">
+        <i class="theme-icon fas fa-sun" id="themeIcon"></i>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

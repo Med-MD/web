@@ -1,0 +1,262 @@
+/* Learning Page Specific Styles */
+
+/* Organs Grid */
+.organs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.organ-card {
+  background: var(--box-background);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 15px 30px var(--box-shadow);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.organ-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.organ-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px var(--box-shadow);
+}
+
+.organ-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+  margin: 0 auto 20px;
+}
+
+.organ-name {
+  color: var(--text-primary);
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.organ-system {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Organ Modal */
+.organ-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  padding: 20px;
+}
+
+.organ-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.organ-modal-content {
+  background: var(--box-background);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 40px;
+  max-width: 800px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 30px 60px var(--box-shadow);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.organ-modal.active .organ-modal-content {
+  transform: scale(1);
+}
+
+.organ-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color 0.3s ease;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.organ-modal-close:hover {
+  color: var(--text-accent);
+  background: rgba(53, 64, 102, 0.1);
+}
+
+.organ-modal-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.organ-modal-icon {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: white;
+  margin: 0 auto 20px;
+}
+
+.organ-modal-title {
+  color: var(--text-primary);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.organ-modal-system {
+  color: var(--text-accent);
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 8px 20px;
+  background: rgba(53, 64, 102, 0.1);
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.organ-modal-description {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.organ-modal-cta {
+  text-align: center;
+  padding: 25px;
+  background: rgba(53, 64, 102, 0.05);
+  border-radius: 15px;
+}
+
+.organ-modal-cta h4 {
+  color: var(--text-primary);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.organ-modal-cta p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.organ-cta-button {
+  padding: 15px 30px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 25px rgba(53, 64, 102, 0.3);
+}
+
+.organ-cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(53, 64, 102, 0.4);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .organs-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+
+  .organ-card {
+    padding: 25px 20px;
+  }
+
+  .organ-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+
+  .organ-name {
+    font-size: 1.2rem;
+  }
+
+  .organ-modal-content {
+    padding: 30px 20px;
+    margin: 10px;
+  }
+
+  .organ-modal-icon {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+  }
+
+  .organ-modal-title {
+    font-size: 2rem;
+  }
+
+  .organ-modal-cta {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .organs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .organ-modal-title {
+    font-size: 1.8rem;
+  }
+}
