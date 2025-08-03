@@ -9,6 +9,28 @@ let userAnswers = []
 let answeredQuestions = []
 let showQuizResults = false
 
+// Hardcoded credentials
+const validUsers = {
+    "Akash": "GorillazIsAwesome",
+    "Lynn": "TakeYourTime",
+    "Kat": "TakeYourTime"
+};
+
+// Protect teacher page
+document.addEventListener("DOMContentLoaded", () => {
+    const isTeachPage = window.location.pathname.includes("teach.html");
+    const loggedInUser = localStorage.getItem("medmdLoggedInUser");
+
+    if (isTeachPage) {
+        if (!loggedInUser || !["Akash", "Lynn", "Kat"].includes(loggedInUser)) {
+            // Not logged in or not a teacher → redirect to sign in
+            window.location.href = "signin.html";
+        }
+    }
+});
+
+
+
 // Quiz Questions Pool
 const quizQuestions = [
   // Week 1 - Intro to Human Body (6 questions)
@@ -616,6 +638,54 @@ function initializeWebsite() {
     initializeEventListeners()
   }
 }
+
+// Check login status
+const loggedInUser = localStorage.getItem("medmdLoggedInUser");
+if (loggedInUser) {
+    showLoggedInUI(loggedInUser);
+}
+
+function showLoggedInUI(username) {
+    const signinNavItem = document.getElementById("signinNavItem");
+    const userNavItem = document.getElementById("userNavItem");
+    const teachNavItem = document.getElementById("teachNavItem");
+
+    // Hide sign in
+    if (signinNavItem) signinNavItem.style.display = "none";
+
+    // If teacher, show Teach link
+    if (["Akash", "Lynn", "Kat"].includes(username)) {
+        if (teachNavItem) {
+            teachNavItem.style.display = "inline-block";
+            teachNavItem.querySelector("a").setAttribute("href", "teach.html");
+        }
+    }
+
+    // Show username dropdown
+    if (userNavItem) {
+        userNavItem.style.display = "inline-block";
+        userNavItem.innerHTML = `
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    ${username} <i class="fas fa-caret-down" style="margin-left: 6px;"></i>
+                </a>
+                <div class="dropdown">
+                    <a href="#" id="logoutButton" class="dropdown-item logout-item">Sign Out</a>
+                </div>
+            </li>
+        `;
+
+        // Logout
+        document.getElementById("logoutButton").addEventListener("click", (e) => {
+            e.preventDefault();
+            localStorage.removeItem("medmdLoggedInUser");
+            window.location.href = "index.html";
+        });
+    }
+}
+
+
+
 
 function hideLoadingScreen() {
   const loadingScreen = document.getElementById("loadingScreen")
@@ -1307,8 +1377,32 @@ function handleSignIn(event) {
   ])
 
   if (isUsernameValid && isPasswordValid) {
-    // Simulate sign in process
-    alert("Sign in functionality is not yet implemented. I'm in love with the shape of youuu")
+    event.preventDefault();
+
+    const usernameInput = document.getElementById("username").value.trim();
+    const passwordInput = document.getElementById("password").value;
+
+    // Clear previous error messages
+    document.getElementById("usernameError").textContent = "";
+    document.getElementById("passwordError").textContent = "";
+
+    // Check if username exists
+    if (!validUsers[usernameInput]) {
+        document.getElementById("usernameError").textContent = "Invalid username.";
+        return;
+    }
+
+    // Check password
+    if (validUsers[usernameInput] !== passwordInput) {
+        document.getElementById("passwordError").textContent = "Incorrect password.";
+        return;
+    }
+
+    // Save login to localStorage
+    localStorage.setItem("medmdLoggedInUser", usernameInput);
+
+    // Redirect to homepage after login
+    window.location.href = "index.html";
   }
 }
 

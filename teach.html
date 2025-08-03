@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedMD - Teacher Resources</title>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="teach.css">
+</head>
+<body data-theme="default">
+
+<div class="container" id="mainContainer">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">MedMD</a>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="programs.html" class="nav-link">
+                        <i class="fas fa-graduation-cap"></i> Programs
+                    </a>
+                    <div class="dropdown">
+                        <a href="human-body-fundamentals.html" class="dropdown-item">Human Body Fundamentals</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="learning.html" class="nav-link">
+                        <i class="fas fa-brain"></i> Learn
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#get-involved" class="nav-link" onclick="showConstructionPopup(event)">
+                        <i class="fas fa-hands-helping"></i> Get Involved
+                    </a>
+                </li>
+                <li class="nav-item" id="teachNavItem">
+                    <a href="teach.html" class="nav-link active">
+                        <i class="fas fa-chalkboard-teacher"></i> Teach
+                    </a>
+                </li>
+                <li class="nav-item" id="signinNavItem">
+                    <a href="signin.html" class="nav-link signin-btn">
+                        <i class="fas fa-sign-in-alt"></i> Sign In
+                    </a>
+                </li>
+                <li class="nav-item" id="userNavItem" style="display:none;">
+                    <span class="user-name" id="userName">MedMDTeacher</span>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Background & Stars -->
+    <div class="background"></div>
+    <div class="stars-container" id="starsContainer"></div>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <h1>Teacher Resources</h1>
+            <p>Exclusive materials for MedMD teachers</p>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="content-wrapper">
+        <div class="content-box" data-scroll="100">
+            <h2>Human Body Fundamentals</h2>
+            <p>Below you’ll find the syllabus and weekly lesson resources for teachers.</p>
+            <div class="syllabus-link">
+                <!--<a href="#" class="primary-button">
+                    <i class="fas fa-file-alt"></i> View Course Syllabus
+                </a>-->
+            </div>
+
+            <!-- Weeks Grid -->
+            <!--<div class="weeks-grid">
+                <div class="week-card" onclick="openWeekModal(1, 'Introduction to the Human Body', false)">
+                    <h3>Week 1</h3><p>Introduction to the Human Body</p>
+                </div>
+                <div class="week-card" onclick="openWeekModal(2, 'Skeletal System', false)">
+                    <h3>Week 2</h3><p>Skeletal System</p>
+                </div>
+                <div class="week-card" onclick="openWeekModal(3, 'Muscular System', false)">
+                    <h3>Week 3</h3><p>Muscular System</p>
+                </div>
+                <div class="week-card" onclick="openWeekModal(4, 'Nervous System', false)">
+                    <h3>Week 4</h3><p>Nervous System</p>
+                </div>
+                <div class="week-card" onclick="openWeekModal(5, 'Circulatory System', 'slideshows/hbf/HBF Week 5.pdf')">
+                    <h3>Week 5</h3><p>Circulatory System</p>
+                </div>
+                <div class="week-card" onclick="openWeekModal(6, 'Respiratory System', false)">
+                    <h3>Week 6</h3><p>Respiratory System</p>
+                </div>
+                <div class="week-card" onclick="openWeekModal(7, 'Digestive System', false)">
+                    <h3>Week 7</h3><p>Digestive System</p>
+                </div>
+                <div class="week-card" onclick="openWeekModal(8, 'Endocrine & Immune Systems', false)">
+                    <h3>Week 8</h3><p>Endocrine & Immune Systems</p>
+                </div>
+            </div>-->
+        </div>
+    </div>
+
+    <!-- Week Modal -->
+    <div class="week-modal" id="weekModal">
+        <div class="week-modal-content">
+            <button class="week-modal-close" onclick="closeWeekModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 id="modalWeekTitle"></h2>
+            <div id="modalWeekContent"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" id="get-involved">
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <div>&copy; 2024 MedMD. All rights reserved.</div>
+                <div>Empowering Future Healthcare Providers</div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script src="script.js"></script>
+<script>
+function openWeekModal(weekNumber, weekName, pdfPath) {
+    document.getElementById("modalWeekTitle").textContent = `Week ${weekNumber} - ${weekName}`;
+    const contentDiv = document.getElementById("modalWeekContent");
+
+    if (pdfPath && pdfPath !== false) {
+        contentDiv.innerHTML = `
+            <iframe src="${pdfPath}" class="pdf-viewer"></iframe>
+            <a href="${pdfPath}" target="_blank" class="view-pdf-link">
+                <i class="fas fa-external-link-alt"></i> Open in New Tab
+            </a>
+        `;
+    } else {
+        contentDiv.innerHTML = `<p style="text-align:center; font-style:italic;">Under Construction</p>`;
+    }
+
+    document.getElementById("weekModal").classList.add("active");
+}
+
+function closeWeekModal() {
+    document.getElementById("weekModal").classList.remove("active");
+}
+</script>
+</body>
+</html>
