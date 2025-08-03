@@ -13,7 +13,7 @@ let showQuizResults = false
 const validUsers = {
     "Akash": "GorillazIsAwesome",
     "Lynn": "TakeYourTime",
-    "Kat": "JustDance2017"
+    "Kat": "IntelligenceChasesYou"
 };
 
 // Protect teacher page
