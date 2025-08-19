@@ -399,7 +399,7 @@ const teamMembers = {
     name: "Akash Saran",
     role: "Co-Founder/Teacher",
     email: "akashsaran.ssp@gmail.com",
-    image: null,
+    image: "images/AkashSAbout.png",
     description:
       "Growing up in a medical family, I've been exposed to healthcare and medical instruments, sparking my passion for science. I aim to inspire young minds to explore medicine, nurture their curiosity in these fields, and foster a new generation of healthcare professionals. Through MedMD, I hope to bridge the gap between complex medical concepts and accessible education for young learners.",
   },
